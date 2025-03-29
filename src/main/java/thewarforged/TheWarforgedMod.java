@@ -5,6 +5,7 @@ import basemod.interfaces.EditCharactersSubscriber;
 import basemod.interfaces.EditKeywordsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
+import org.apache.logging.log4j.Level;
 import thewarforged.character.TheWarforged;
 import thewarforged.util.GeneralUtils;
 import thewarforged.util.KeywordInfo;
@@ -55,11 +56,10 @@ public class TheWarforgedMod implements
         TheWarforged.Meta.registerColor();
     }
 
-    //This is a constant so that logger.info stops complaining.
-    private final String SUBSCRIBED_INFO_STRING = modID + " subscribed to BaseMod.";
-
     public TheWarforgedMod() {
         BaseMod.subscribe(this); //This will make BaseMod trigger all the subscribers at their appropriate times.
+        //This is a constant so that logger.info stops complaining.
+        String SUBSCRIBED_INFO_STRING = modID + " subscribed to BaseMod.";
         logger.info(SUBSCRIBED_INFO_STRING);
     }
 
@@ -100,7 +100,9 @@ public class TheWarforgedMod implements
                 loadLocalization(getLangString());
             }
             catch (GdxRuntimeException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                //Since printStackTrace is considered bad practice, I am logging the error this way instead.
+                logger.log(Level.ERROR, e);
             }
         }
     }
@@ -183,13 +185,20 @@ public class TheWarforgedMod implements
 
     /**
      * Checks the expected resources path based on the package name.
+     * <br> <br>
+     * Suppressing the extract method recommendation because I am not familiar enough with all of this to risk
+     * moving this around.
      */
+    @SuppressWarnings("ExtractMethodRecommender")
     private static String checkResourcesPath() {
-        String name = TheWarforgedMod.class.getName(); //getPackage can be iffy with patching, so class name is used instead.
+        //Using class.getPackage() can be iffy with patching, so class.getName() is used instead.
+        String name = TheWarforgedMod.class.getName();
         int separator = name.indexOf('.');
-        if (separator > 0)
-            name = name.substring(0, separator);
+        //IDEA Seems to think that "separator" will always be > 0,
+        // so I unwrapped the following line from the if statement.
+        name = name.substring(0, separator);
 
+        //Once more familiar with all of this, extract this method and remove above suppression.
         FileHandle resources = new LwjglFileHandle(name, Files.FileType.Internal);
 
         if (!resources.exists()) {
@@ -212,7 +221,12 @@ public class TheWarforgedMod implements
 
     /**
      * This determines the mod's ID based on information stored by ModTheSpire.
+     * <br> <br>
+     * Suppression necessary since IDEA seems to think that a map of <URL, AnnotationDB> can somehow
+     * have a URL has a value instead of a key. Perhaps there is a better way to handle this, but I do not know
+     * yet and I don't want this warning all the time.
      */
+    @SuppressWarnings("UrlHashCode")
     private static void loadModInfo() {
         Optional<ModInfo> infos = Arrays.stream(Loader.MODINFOS).filter((modInfo)->{
             AnnotationDB annotationDB = Patcher.annotationDBMap.get(modInfo.jarURL);
