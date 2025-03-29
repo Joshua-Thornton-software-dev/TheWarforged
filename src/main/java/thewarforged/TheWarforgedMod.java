@@ -1,9 +1,11 @@
 package thewarforged;
 
 import basemod.BaseMod;
+import basemod.interfaces.EditCharactersSubscriber;
 import basemod.interfaces.EditKeywordsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
+import thewarforged.character.TheWarforged;
 import thewarforged.util.GeneralUtils;
 import thewarforged.util.KeywordInfo;
 import thewarforged.util.TextureLoader;
@@ -29,6 +31,7 @@ import java.util.*;
 
 @SpireInitializer
 public class TheWarforgedMod implements
+        EditCharactersSubscriber,
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         PostInitializeSubscriber {
@@ -47,6 +50,9 @@ public class TheWarforgedMod implements
     //This will be called by ModTheSpire because of the @SpireInitializer annotation at the top of the class.
     public static void initialize() {
         new TheWarforgedMod();
+
+        //Register the "colors" of the character's cards (not really colors, more like type categories).
+        TheWarforged.Meta.registerColor();
     }
 
     //This is a constant so that logger.info stops complaining.
@@ -222,5 +228,12 @@ public class TheWarforgedMod implements
         else {
             throw new RuntimeException("Failed to determine mod info/ID based on initializer.");
         }
+    }
+
+    //This is necessary to implement the EditCharactersSubscriber interface.
+    @Override
+    public void receiveEditCharacters() {
+        //Registers the character defined in java > thewarforged > character > TheWarforged.java.
+        TheWarforged.Meta.registerCharacter();
     }
 }
