@@ -49,9 +49,12 @@ public class TheWarforgedMod implements
         new TheWarforgedMod();
     }
 
+    //This is a constant so that logger.info stops complaining.
+    private final String SUBSCRIBED_INFO_STRING = modID + " subscribed to BaseMod.";
+
     public TheWarforgedMod() {
         BaseMod.subscribe(this); //This will make BaseMod trigger all the subscribers at their appropriate times.
-        logger.info(modID + " subscribed to BaseMod.");
+        logger.info(SUBSCRIBED_INFO_STRING);
     }
 
     @Override
@@ -140,7 +143,8 @@ public class TheWarforgedMod implements
             }
             catch (Exception e)
             {
-                logger.warn(modID + " does not support " + getLangString() + " keywords.");
+                final String NOT_SUPPORTED_STRING = modID + " does not support " + getLangString() + " keywords.";
+                logger.warn(NOT_SUPPORTED_STRING);
             }
         }
     }
