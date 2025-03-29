@@ -1,4 +1,4 @@
-package basicmod.util;
+package thewarforged.util;
 
 public class GeneralUtils {
     public static String arrToString(Object[] arr) {

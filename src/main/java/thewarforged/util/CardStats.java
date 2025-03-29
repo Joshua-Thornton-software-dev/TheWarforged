@@ -1,4 +1,4 @@
-package basicmod.util;
+package thewarforged.util;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
