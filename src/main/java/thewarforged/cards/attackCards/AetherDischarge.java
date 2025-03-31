@@ -1,13 +1,13 @@
-package thewarforged.cards.attacks;
+package thewarforged.cards.attackCards;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewarforged.actions.attackactions.AetherDischargeAction;
-import thewarforged.cards.BaseCard;
+import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.util.CardStats;
 
-public class AetherDischarge extends BaseCard {
+public class AetherDischarge extends AbstractWarforgedCard {
     public static final String ID = makeID(AetherDischarge.class.getSimpleName());
 
     private static final CardStats info = new CardStats(

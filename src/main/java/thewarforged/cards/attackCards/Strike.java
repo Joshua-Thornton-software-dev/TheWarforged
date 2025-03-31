@@ -1,15 +1,15 @@
-package thewarforged.cards.attacks;
+package thewarforged.cards.attackCards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import thewarforged.cards.BaseCard;
+import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.util.CardStats;
 
-public class Strike extends BaseCard {
+public class Strike extends AbstractWarforgedCard {
     //Using makeID adds the mod ID, so the final ID will be something like "thewarforged:Strike".
     // Using class.getSimpleName() instead of a String literal allows for easy class renaming down the road.
     public static final String ID = makeID(Strike.class.getSimpleName());

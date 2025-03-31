@@ -1,13 +1,13 @@
-package thewarforged.cards.skills;
+package thewarforged.cards.skillCards;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import thewarforged.cards.BaseCard;
+import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.util.CardStats;
 
-public class Defend extends BaseCard {
+public class Defend extends AbstractWarforgedCard {
     public static final String ID = makeID(Defend.class.getSimpleName());
 
     private static final CardStats info = new CardStats(
