@@ -7,8 +7,8 @@ import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.util.CardStats;
 
-public class Defend extends AbstractWarforgedCard {
-    public static final String ID = makeID(Defend.class.getSimpleName());
+public class Defend_Warforged extends AbstractWarforgedCard {
+    public static final String ID = makeID(Defend_Warforged.class.getSimpleName());
 
     private static final CardStats info = new CardStats(
             TheWarforged.Meta.CARD_COLOR,
@@ -23,7 +23,7 @@ public class Defend extends AbstractWarforgedCard {
     private static final int UPGRADED_BLOCK_AMOUNT_INCREASE = 3;
 
     // CONSTRUCTOR
-    public Defend() {
+    public Defend_Warforged() {
         super(ID, info);
 
         setBlock(BLOCK_AMOUNT, UPGRADED_BLOCK_AMOUNT_INCREASE);

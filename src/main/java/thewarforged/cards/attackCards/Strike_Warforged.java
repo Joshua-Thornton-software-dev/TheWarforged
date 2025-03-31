@@ -9,10 +9,10 @@ import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.util.CardStats;
 
-public class Strike extends AbstractWarforgedCard {
-    //Using makeID adds the mod ID, so the final ID will be something like "thewarforged:Strike".
+public class Strike_Warforged extends AbstractWarforgedCard {
+    //Using makeID adds the mod ID, so the final ID will be something like "thewarforged:Strike_Warforged".
     // Using class.getSimpleName() instead of a String literal allows for easy class renaming down the road.
-    public static final String ID = makeID(Strike.class.getSimpleName());
+    public static final String ID = makeID(Strike_Warforged.class.getSimpleName());
 
     private static final CardStats info = new CardStats(
             //The card's "color", which is really just a type categorization. Set up in TheWarforfed.java.
@@ -40,7 +40,7 @@ public class Strike extends AbstractWarforgedCard {
     private static final int UPGRADED_ATTACK_DAMAGE_INCREASE = 3;
 
     // CONSTRUCTOR
-    public Strike() {
+    public Strike_Warforged() {
         //This information is required for BaseCard's constructor.
         super(ID, info);
 
@@ -48,7 +48,7 @@ public class Strike extends AbstractWarforgedCard {
         // This method is provided via BaseCard (the parent class).
         setDamage(ATTACK_DAMAGE, UPGRADED_ATTACK_DAMAGE_INCREASE);
 
-        //Add these tags so that the game knows that this is a Strike card, and specifically a Starter Strike. "tags"
+        //Add these tags so that the game knows that this is a Strike_Warforged card, and specifically a Starter Strike_Warforged. "tags"
         // comes from AbstractCard, the parent class to BaseCard (this class's grandparent class).
         tags.add(CardTags.STARTER_STRIKE);
         tags.add(CardTags.STRIKE);

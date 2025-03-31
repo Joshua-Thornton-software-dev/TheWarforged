@@ -7,8 +7,9 @@ import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.util.CardStats;
 
-public class AetherDischarge extends AbstractWarforgedCard {
-    public static final String ID = makeID(AetherDischarge.class.getSimpleName());
+public class AetherDischarge_Warforged extends AbstractWarforgedCard {
+    public static final String ID = makeID(
+            AetherDischarge_Warforged.class.getSimpleName());
 
     private static final CardStats info = new CardStats(
             TheWarforged.Meta.CARD_COLOR,
@@ -22,7 +23,7 @@ public class AetherDischarge extends AbstractWarforgedCard {
     private static final int UPGRADED_ATTACK_DAMAGE_INCREASE = 1;
 
     // CONSTRUCTOR
-    public AetherDischarge() {
+    public AetherDischarge_Warforged() {
         super(ID, info);
 
         setDamage(ATTACK_DAMAGE, UPGRADED_ATTACK_DAMAGE_INCREASE);
