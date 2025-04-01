@@ -21,7 +21,7 @@ public class RaiseShields_Warforged extends AbstractWarforgedCard {
     );
 
     private static final int ENERGY_SHIELD_AMOUNT = 4;
-    private static final int UPGRADED_ENERGY_SHIELD_AMOUNT_INCREASE = 2;
+    private static final int UPGRADED_ENERGY_SHIELD_AMOUNT_INCREASE = 1;
 
     private static final int REPEAT_GAIN_AMOUNT = 3;
     private static final int UPGRADED_REPEAT_GAIN_AMOUNT_INCREASE = 1;
