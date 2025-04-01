@@ -26,7 +26,7 @@ public class Defend_Warforged extends AbstractWarforgedCard {
     public Defend_Warforged() {
         super(ID, info);
 
-        setBlock(BLOCK_AMOUNT, UPGRADED_BLOCK_AMOUNT_INCREASE);
+        this.setBlock(BLOCK_AMOUNT, UPGRADED_BLOCK_AMOUNT_INCREASE);
 
         //There is apparently no card tag for defends/blocking except for the STARTER_DEFEND.
         tags.add(CardTags.STARTER_DEFEND);
@@ -44,6 +44,6 @@ public class Defend_Warforged extends AbstractWarforgedCard {
                 block,
                 false
         );
-        addToBot(gainBlockAction);
+        this.addToBot(gainBlockAction);
     }
 }

@@ -46,7 +46,7 @@ public class Strike_Warforged extends AbstractWarforgedCard {
 
         //This sets the damage for the card and how much that damage should increase when upgraded.
         // This method is provided via BaseCard (the parent class).
-        setDamage(ATTACK_DAMAGE, UPGRADED_ATTACK_DAMAGE_INCREASE);
+        this.setDamage(ATTACK_DAMAGE, UPGRADED_ATTACK_DAMAGE_INCREASE);
 
         //Add these tags so that the game knows that this is a Strike_Warforged card, and specifically a Starter Strike_Warforged. "tags"
         // comes from AbstractCard, the parent class to BaseCard (this class's grandparent class).
@@ -67,10 +67,9 @@ public class Strike_Warforged extends AbstractWarforgedCard {
                 //The source of this damage (AbstractCreature).
                 player,
                 //The base damage for this damage (before modifiers).
-                damage,
+                this.damage,
                 //The type of damage being inflicted. Can be NORMAL, THORNS, or HP_LOSS.
-                DamageInfo.DamageType.NORMAL
-        );
+                DamageInfo.DamageType.NORMAL);
         // Set up the damage action which will be added to the action queue.
         DamageAction damageAction = new DamageAction(
                 //The target of this damage action (AbstractCreature).
@@ -81,6 +80,6 @@ public class Strike_Warforged extends AbstractWarforgedCard {
                 AbstractGameAction.AttackEffect.SLASH_VERTICAL
         );
         //Add that damage action to the bottom of the queue. It will happen once all actions before it finish.
-        addToBot(damageAction);
+        this.addToBot(damageAction);
     }
 }
