@@ -18,9 +18,13 @@
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! block."
   },
+  "${modID}:DirectCurrent_Warforged": {
+    "NAME": "Direct Current",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:Ionized."
+  },
   "${modID}:RaiseShields_Warforged": {
     "NAME": "Raise Shields",
-    "DESCRIPTION": "Gain !B! Energy Shield 3 times. NL Dexterity affects this card."
+    "DESCRIPTION": "Gain !B! ${modID}:Energy_Shield !M! times. NL Dexterity affects this card."
   },
   "${modID}:Strike_Warforged": {
     "NAME": "Strike",

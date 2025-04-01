@@ -20,6 +20,7 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.relics.BurningBlood;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import thewarforged.cards.attackCards.AetherDischarge_Warforged;
+import thewarforged.cards.attackCards.DirectCurrent_Warforged;
 import thewarforged.cards.attackCards.Strike_Warforged;
 import thewarforged.cards.skillCards.Defend_Warforged;
 import thewarforged.cards.skillCards.RaiseShields_Warforged;
@@ -141,10 +142,10 @@ public class TheWarforged extends CustomPlayer {
         //List of IDs of cards for your starting deck.
         //If you want multiple of the same card, you have to add it multiple times.
         retVal.add(Strike_Warforged.ID);
-        retVal.add(Strike_Warforged.ID);
         retVal.add(Defend_Warforged.ID);
         retVal.add(AetherDischarge_Warforged.ID);
         retVal.add(RaiseShields_Warforged.ID);
+        retVal.add(DirectCurrent_Warforged.ID);
 
         return retVal;
     }
