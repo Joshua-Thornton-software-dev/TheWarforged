@@ -5,6 +5,7 @@ import basemod.BaseMod;
 import basemod.interfaces.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.Level;
+import thewarforged.cards.BaseCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.relics.BaseRelic;
 import thewarforged.util.GeneralUtils;
@@ -34,6 +35,7 @@ import java.util.*;
 public class TheWarforgedMod implements
         EditCharactersSubscriber,
         EditRelicsSubscriber,
+        EditCardsSubscriber,
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         PostInitializeSubscriber {
@@ -250,6 +252,21 @@ public class TheWarforgedMod implements
     public void receiveEditCharacters() {
         //Registers the character defined in java > thewarforged > character > TheWarforged.java.
         TheWarforged.Meta.registerCharacter();
+    }
+
+    //This is necessary to implement the EditCardsSubscriber interface.
+    @Override
+    public void receiveEditCards() {
+        //AutoAdd() loads files from this mod. In this case, we are loading (registering?) cards.
+        new AutoAdd(modID)
+                //Ensures that only files in the same package as this mod are used (I believe).
+                // I also believe that passing in BaseCard.class excludes the base card from being added,
+                // since it is not really a card by itself.
+                .packageFilter(BaseCard.class)
+                //Sets the cards (maybe the files? Probably the cards) as being seen in the compendium.
+                .setDefaultSeen(true)
+                //Adds the cards (instead of relics or events, I think).
+                .cards();
     }
 
     @Override

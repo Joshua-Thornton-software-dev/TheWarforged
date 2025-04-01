@@ -9,7 +9,7 @@
       "the",
       "text"
     ],
-    "DESCRIPTION": "This is displayed in the tooltip. Spaces should not be used be avoided in NAMES, with the exception of multi-word keywords (see next entry)."
+    "DESCRIPTION": "This is displayed in the tooltip. Spaces should be avoided in NAMES, with the exception of multi-word keywords (see next entry)."
   },
   {
     "PROPER_NAME": "Multiword Keyword",
@@ -19,5 +19,22 @@
       "multiword_keywords"
     ],
     "DESCRIPTION": "Make sure the first element in NAMES has no underscores. The rest should use _ in the place of spaces. In card text, you'll use the underscore versions."
+  },
+  {
+    "ENERGY_SHIELDS": "Energy Shields",
+    "NAMES": [
+      "energy shield",
+      "energy_shield",
+      "energy_shields"
+    ],
+    "DESCRIPTION": "Negates damage before Block is lost."
+  },
+  {
+    "IONIZED": "Ionized",
+    "NAMES": [
+      "ionized",
+      "ionize"
+    ],
+    "DESCRIPTION": "For each attack, also take half that attack's damage (rounded down) and reduce Ionize by 1."
   }
 ]
