@@ -16,6 +16,9 @@ public class EnergyShieldBlockModifier extends AbstractBlockModifier {
     public EnergyShieldBlockModifier() {}
 
     @Override
+    public Priority priority() { return Priority.TOP; }
+
+    @Override
     public int amountLostAtStartOfTurn() {
         return ((this.getCurrentAmount() + 1) / 2);
     }
