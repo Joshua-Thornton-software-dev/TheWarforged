@@ -8,5 +8,43 @@
       "If you need to use it for stuff.",
       "Blizzard is a good example for this."
     ]
+  },
+  "${modID}:AetherDischarge_Warforged": {
+    "NAME": "Aether Discharge",
+    "DESCRIPTION": "Deal !D! damage X times to ALL enemies.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage X + 1 times to ALL enemies."
+  },
+  "${modID}:Defend_Warforged": {
+    "NAME": "Defend",
+    "DESCRIPTION": "Gain !B! block."
+  },
+  "${modID}:DirectCurrent_Warforged": {
+    "NAME": "Direct Current",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:Ionized."
+  },
+  "${modID}:RaiseShields_Warforged": {
+    "NAME": "Raise Shields",
+    "DESCRIPTION": "Gain !B! ${modID}:Energy_Shield !M! times. NL Dexterity affects this card."
+  },
+  "${modID}:Strike_Warforged": {
+    "NAME": "Strike",
+    "DESCRIPTION": "Deal !D! damage."
+  },
+
+
+
+
+  "${modID}:_BlockModifier": {
+    "NAME": "Cool Block Modifier",
+    "DESCRIPTION": "A cool block modifier that does things.",
+    "EXTENDED_DESCRIPTION": [
+      "It's really cool",
+      "ICE COLD",
+      "part 3"
+    ]
+  },
+  "${modID}:EnergyShieldBlockModifier": {
+    "NAME": "Energy Shield",
+    "DESCRIPTION": "A powerful energy barrier that negates damage before #yBlock is applied."
   }
 }
