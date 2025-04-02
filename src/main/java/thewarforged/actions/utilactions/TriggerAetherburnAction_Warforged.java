@@ -14,7 +14,7 @@ public class TriggerAetherburnAction_Warforged extends AbstractGameAction {
     @Override
     public void update() {
         if (this.crackedAetherheartRelic != null) {
-            this.crackedAetherheartRelic.runawayAetherheart_Aetherburn();
+            this.crackedAetherheartRelic.volatileAether_Aetherburn();
         } else {
             final String errorStr =
                     "Bad reference to CrackedAetherheartRelic_Warforged passed to TriggerAetherburnAction_Warforged.";

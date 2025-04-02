@@ -111,13 +111,13 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
     @Override
     public void onUseCard(AbstractCard targetCard, UseCardAction useCardAction) {
         //A card was played! Track the number of cards played for the overload mechanic.
-        this.runawayAetherheart_IncreaseCharge(targetCard, useCardAction);
+        this.volatileAether_IncreaseCharge(targetCard, useCardAction);
         //If the number of cards played is NOT back to 0 (after being tracked and possibly reset above),
         if (this.numCardsPlayed != 0) {
             // then this card was NOT the overload (copy) card, and therefore counts for energy
             // gain/aetherburn. Delay the aetherburn for X_COST cards, though.
             boolean shouldDelayAetherburn = (targetCard.cost == CardStats.X_COST());
-            this.runawayAetherheart_GainEnergy(shouldDelayAetherburn);
+            this.volatileAether_GainEnergy(shouldDelayAetherburn);
         }
     }
 
@@ -126,7 +126,7 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
      * The character gains energy. The amount gained increases dramatically as they play
      * more and more cards in the same turn.
      */
-    private void runawayAetherheart_GainEnergy(boolean shouldDelayAetherburn) {
+    private void volatileAether_GainEnergy(boolean shouldDelayAetherburn) {
 
         //This action will trigger aetherburn after the energy is gained.
         GainEnergyAction_Warforged gainEnergyAction =
@@ -138,9 +138,9 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
      * Handles the HP loss triggered by having too much energy after playing a card. The energy gained by
      * playing a card via this relic is included in this calculation, and this method is called by that custom
      * GainEnergyAction_Warforged after the energy is applied. Once aetherburn is handled, this method calls
-     * runawayAetherheart_BalancePowers() to adjust the character's Dex/Str according to the new energy level.
+     * volatileAether_BalancePowers() to adjust the character's Dex/Str according to the new energy level.
      */
-    public void runawayAetherheart_Aetherburn() {
+    public void volatileAether_Aetherburn() {
         // Determine how much energy the character has past the maximum safe amount.
         int currEnergy = EnergyPanel.getCurrentEnergy();
         int aetherburn = currEnergy - MAX_SAFE_ENERGY;
@@ -155,14 +155,14 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
         }
 
         //After handling aetherburn, balance the character's Dex/Str based on new energy levels.
-        this.runawayAetherheart_BalancePowers();
+        this.volatileAether_BalancePowers();
     }
 
     /**
      * Balances the Dex/Str on the Warforged according to the current energy tier. For every tier,
      * Dexterity reduces by 1 and Strength increases by 1. When energy is lost, rewinds those differences.
      */
-    private void runawayAetherheart_BalancePowers() {
+    private void volatileAether_BalancePowers() {
         int newDex;
         int newStr;
 
@@ -233,11 +233,11 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
      * Then the amount of energy gained per card played increases (multiplicative).
      * @param targetCard The card that was last played by the character
      */
-    private void runawayAetherheart_IncreaseCharge(AbstractCard targetCard, UseCardAction useCardAction) {
+    private void volatileAether_IncreaseCharge(AbstractCard targetCard, UseCardAction useCardAction) {
         this.numCardsPlayed++;
         if (numCardsPlayed == this.NUM_CARDS_FOR_OVERLOAD) {
             //Overload this card and double the amount of energy gained per card played.
-            this.runawayAetherheart_Overload(targetCard, useCardAction);
+            this.volatileAether_Overload(targetCard, useCardAction);
             this.currentEnergyGain *= this.OVERLOAD_ENERGY_GAIN_MULTIPLIER;
             //If this is the card played immediately after overloading a card,
         } else if (numCardsPlayed == this.NUM_CARDS_FOR_RESET) {
@@ -251,7 +251,7 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
      * Duplicates the target card.
      * @param targetCard The card to duplicate
      */
-    private void runawayAetherheart_Overload(AbstractCard targetCard, UseCardAction useCardAction) {
+    private void volatileAether_Overload(AbstractCard targetCard, UseCardAction useCardAction) {
         //This follows the pattern shown in EchoPower.class, which doubles a card the same way overload should.
         this.flash();
         //Get the monster target of the card being copied, if one exists.

@@ -35,7 +35,7 @@ public class GainEnergyAction_Warforged extends GainEnergyAction {
             this.addToBot(triggerAetherburnAction_warforged);
             //Else, trigger is immediately.
         } else {
-            ((CrackedAetherheartRelic_Warforged) crackedAetherheartRelic).runawayAetherheart_Aetherburn();
+            ((CrackedAetherheartRelic_Warforged) crackedAetherheartRelic).volatileAether_Aetherburn();
         }
         this.isDone = true;
     }
