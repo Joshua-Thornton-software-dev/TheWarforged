@@ -18,14 +18,13 @@ import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import thewarforged.actions.utilactions.GainEnergyAction_Warforged;
-import thewarforged.character.TheWarforged;
 import thewarforged.core.EnergyManager_Warforged;
 import thewarforged.relics.AbstractWarforgedRelic;
 import thewarforged.util.CardStats;
-import thewarforged.util.GeneralUtils;
 
 import static thewarforged.TheWarforgedMod.makeID;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
     private static final String NAME = CrackedAetherheartRelic_Warforged.class.getSimpleName();
     public static final String ID = makeID(NAME);
