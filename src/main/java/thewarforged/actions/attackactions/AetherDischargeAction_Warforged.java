@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.vfx.combat.CleaveEffect;
 import com.megacrit.cardcrawl.vfx.combat.WhirlwindEffect;
 import thewarforged.util.CardStats;
 
-public class AetherDischargeAction extends AbstractGameAction {
+public class AetherDischargeAction_Warforged extends AbstractGameAction {
     public int[] multiDamage;
 
     private final boolean freeToPlayOnce;
@@ -25,7 +25,7 @@ public class AetherDischargeAction extends AbstractGameAction {
     private final boolean isUpgraded;
 
     // CONSTRUCTOR
-    public AetherDischargeAction(
+    public AetherDischargeAction_Warforged(
             AbstractPlayer player,
             int[] multiDamage,
             DamageInfo.DamageType damageType,

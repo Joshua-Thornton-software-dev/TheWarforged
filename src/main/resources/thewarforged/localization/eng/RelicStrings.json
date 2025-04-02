@@ -5,5 +5,12 @@
     "DESCRIPTIONS": [
       "Gain [E] at the start of your turn. [E] is an energy icon."
     ]
+  },
+  "${modID}:CrackedAetherheartRelic_Warforged": {
+    "NAME": "Cracked Aetherheart",
+    "FLAVOR": "The soul of an automaton, damaged from the lightning of an aetherstorm.\nGenerates energy uncontrollably.",
+    "DESCRIPTIONS": [
+      "Gain [E] whenever you play any card."
+    ]
   }
 }
