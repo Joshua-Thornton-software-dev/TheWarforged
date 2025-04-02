@@ -32,7 +32,9 @@ import static thewarforged.TheWarforgedMod.makeID;
 
 public class TheWarforged extends CustomPlayer {
     //Stats
-    public static final int ENERGY_PER_TURN = 0;
+    //This ENERGY_PER_TURN is meant to be standard *just in case* the Warforged character somehow gets played
+    // without its CrackedAetherheart relic, since gaining no energy per turn is a fundamental part of its mechanics.
+    public static final int ENERGY_PER_TURN = 3;
     public static final int MAX_HP = 75;
     public static final int STARTING_GOLD = 99;
     public static final int CARD_DRAW = 5;
@@ -115,18 +117,6 @@ public class TheWarforged extends CustomPlayer {
             360.0F
     };
 
-    //Our custom EnergyManager_Warforged. When loading into a preexisting save, this gets overwritten by the
-    // default EnergyManager, so we have to apply it back to the player. Use the energyManager_Warforged() method
-    // to ensure this is not null when retrieved.
-    private EnergyManager_Warforged _energyManager_Warforged;
-
-    public EnergyManager_Warforged energyManager_Warforged() {
-        if (this._energyManager_Warforged == null) {
-            this._energyManager_Warforged = new EnergyManager_Warforged(ENERGY_PER_TURN);
-        }
-        return this._energyManager_Warforged;
-    }
-
 
     //Actual character class code below this point
 
@@ -141,7 +131,7 @@ public class TheWarforged extends CustomPlayer {
                 CORPSE,
                 getLoadout(),
                 20.0F, -20.0F, 200.0F, 250.0F, //Character hitbox. x y position, then width and height.
-                this.energyManager_Warforged());
+                new EnergyManager_Warforged(ENERGY_PER_TURN));
 
         //Location for text bubbles. You can adjust it as necessary later. For most characters, these values are fine.
         dialogX = (drawX + 0.0F * Settings.scale);

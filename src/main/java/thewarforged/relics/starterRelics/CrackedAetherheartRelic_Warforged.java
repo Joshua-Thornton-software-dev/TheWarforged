@@ -69,7 +69,15 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
 
     @Override
     public String getUpdatedDescription() {
-        return this.DESCRIPTIONS[0];
+        return this.DESCRIPTIONS[0]
+                + DESCRIPTIONS[1]
+                + DESCRIPTIONS[2]
+                + this.NUM_CARDS_FOR_OVERLOAD
+                + DESCRIPTIONS[3]
+                + DESCRIPTIONS[4]
+                + DESCRIPTIONS[5]
+                + this.MAX_SAFE_ENERGY
+                + DESCRIPTIONS[6];
     }
 
     @Override
@@ -274,9 +282,16 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
         this.actionManager().addCardQueueItem(cardQueueItem, true);
     }
 
+    /**
+     * Ensure that the character is using the custom energy manager meant for the Warforged, and set its energy
+     * gained per turn to 0 as the relic intends. I allowed the default to be 3 just in case the Warforged was ever
+     * played without this relic for some reason.
+     */
     private void ensureCustomEnergyManager() {
         if (!(this.player().energy instanceof EnergyManager_Warforged)) {
             this.player().energy = new EnergyManager_Warforged(EnergyPanel.getCurrentEnergy());
         }
+        this.player().energy.energyMaster = 0;
+        this.player().energy.energy = 0;
     }
 }
