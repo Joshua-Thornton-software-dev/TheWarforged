@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import thewarforged.util.GeneralUtils;
 
 import static thewarforged.TheWarforgedMod.makeID;
 
@@ -32,7 +31,6 @@ public class IonizedPower_Warforged extends AbstractWarforgedPower {
     @Override
     public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
         if (info.type != DamageInfo.DamageType.NORMAL || target == info.owner) {
-            GeneralUtils.easyPrint("Not a valid attack for Ionized damage. Damage type: " + info.type);
             return;
         }
 
@@ -42,10 +40,8 @@ public class IonizedPower_Warforged extends AbstractWarforgedPower {
         //I believe that the check for it being 0 is just an abundance of caution, but the base game does it
         // with powers like Vulnerable, so I will imitate them.
         if (this.amount <= 0) {
-            GeneralUtils.easyPrint("Amount was <= 0, so adding action to remove the power.");
             this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
         } else {
-            GeneralUtils.easyPrint("Amount was > 0, so adding action to decrement the power by 1.");
             //Because we are adding these to the top of the queue, and this should happen *after* the
             // damage action, this needs to be added first. Same with the RemoveSpecificPowerAction above.
             this.addToTop(new ReducePowerAction(this.owner, this.owner, POWER_ID, 1));

@@ -5,5 +5,18 @@
     "DESCRIPTIONS": [
       "Gain [E] at the start of your turn. [E] is an energy icon."
     ]
+  },
+  "${modID}:CrackedAetherheartRelic_Warforged": {
+    "NAME": "Cracked Aetherheart",
+    "FLAVOR": "The soul of an automaton, damaged from the lightning of an aetherstorm.\nGenerates energy uncontrollably.",
+    "DESCRIPTIONS": [
+      "#yLiving #yConstruct: Energy is now conserved between turns. You gain no energy at the start of your turn.",
+      " NL #yVolatile #yAether: Gain [E] whenever you play any card.",
+      " NL #yOverload: Every ",
+      "th card played is played twice and the number of [E] gained per card played is doubled (resets each turn).",
+      " NL The copy does not trigger effects from this relic.",
+      " NL #yAetherburn: After playing a card, lose HP for each [E] past ",
+      "."
+    ]
   }
 }

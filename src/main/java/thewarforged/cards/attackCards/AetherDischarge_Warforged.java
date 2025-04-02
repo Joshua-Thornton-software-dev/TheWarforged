@@ -2,7 +2,7 @@ package thewarforged.cards.attackCards;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import thewarforged.actions.attackactions.AetherDischargeAction;
+import thewarforged.actions.attackactions.AetherDischargeAction_Warforged;
 import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.util.CardStats;
@@ -33,7 +33,7 @@ public class AetherDischarge_Warforged extends AbstractWarforgedCard {
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        AetherDischargeAction aetherDischargeAction = new AetherDischargeAction(
+        AetherDischargeAction_Warforged aetherDischargeActionWarforged = new AetherDischargeAction_Warforged(
                 //The source of this damage.
                 player,
                 //An array of integers representing the damage being applied to the multiple targets of this attack.
@@ -49,6 +49,6 @@ public class AetherDischarge_Warforged extends AbstractWarforgedCard {
                 //Whether this card has been upgraded.
                 this.upgraded
         );
-        addToBot(aetherDischargeAction);
+        addToBot(aetherDischargeActionWarforged);
     }
 }

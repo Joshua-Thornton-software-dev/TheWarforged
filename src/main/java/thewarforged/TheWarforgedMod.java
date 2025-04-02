@@ -3,9 +3,11 @@ package thewarforged;
 import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.interfaces.*;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.Level;
 import thewarforged.cards.BaseCard;
 import thewarforged.character.TheWarforged;
+import thewarforged.relics.BaseRelic;
 import thewarforged.util.GeneralUtils;
 import thewarforged.util.KeywordInfo;
 import thewarforged.util.TextureLoader;
@@ -32,6 +34,7 @@ import java.util.*;
 @SpireInitializer
 public class TheWarforgedMod implements
         EditCharactersSubscriber,
+        EditRelicsSubscriber,
         EditCardsSubscriber,
         EditStringsSubscriber,
         EditKeywordsSubscriber,
@@ -264,5 +267,30 @@ public class TheWarforgedMod implements
                 .setDefaultSeen(true)
                 //Adds the cards (instead of relics or events, I think).
                 .cards();
+    }
+
+    @Override
+    public void receiveEditRelics() {
+        new AutoAdd(modID)
+                .packageFilter(BaseRelic.class)
+                .any(BaseRelic.class, (info, relic) -> {
+                    //relic.pool will NOT be null if this relic is character-specific. Because we already filtered
+                    // to only relics in my package, this means that they will be custom and specific to the Warforged.
+                    if (relic.pool != null) {
+                        //Add that relic to the custom pool that is specified on the relic (Warforged custom pool).
+                        BaseMod.addRelicToCustomPool(relic, relic.pool);
+                    } else {
+                        //These have null value for relic.pool, so they are generic relics (or specific to a base
+                        // game character, IDK how that works).
+                        BaseMod.addRelic(relic, relic.relicType);
+                    }
+
+                    //Relic class annotated with @AutoAdd.seen will have their info.seen marked true.
+                    // (I'm sure that it can be set manually, not sure how that worked yet)
+                    // This makes any relic that has been seen before visible in the relic library.
+                    if (info.seen) {
+                        UnlockTracker.markRelicAsSeen(relic.relicId);
+                    }
+                });
     }
 }

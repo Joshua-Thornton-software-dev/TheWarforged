@@ -12,18 +12,18 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
-import com.megacrit.cardcrawl.relics.BurningBlood;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import thewarforged.cards.attackCards.AetherDischarge_Warforged;
 import thewarforged.cards.attackCards.DirectCurrent_Warforged;
 import thewarforged.cards.attackCards.Strike_Warforged;
 import thewarforged.cards.skillCards.Defend_Warforged;
 import thewarforged.cards.skillCards.RaiseShields_Warforged;
+import thewarforged.core.EnergyManager_Warforged;
+import thewarforged.relics.starterRelics.CrackedAetherheartRelic_Warforged;
 
 import java.util.ArrayList;
 
@@ -32,8 +32,10 @@ import static thewarforged.TheWarforgedMod.makeID;
 
 public class TheWarforged extends CustomPlayer {
     //Stats
+    //This ENERGY_PER_TURN is meant to be standard *just in case* the Warforged character somehow gets played
+    // without its CrackedAetherheart relic, since gaining no energy per turn is a fundamental part of its mechanics.
     public static final int ENERGY_PER_TURN = 3;
-    public static final int MAX_HP = 70;
+    public static final int MAX_HP = 75;
     public static final int STARTING_GOLD = 99;
     public static final int CARD_DRAW = 5;
     public static final int ORB_SLOTS = 0;
@@ -129,7 +131,7 @@ public class TheWarforged extends CustomPlayer {
                 CORPSE,
                 getLoadout(),
                 20.0F, -20.0F, 200.0F, 250.0F, //Character hitbox. x y position, then width and height.
-                new EnergyManager(ENERGY_PER_TURN));
+                new EnergyManager_Warforged(ENERGY_PER_TURN));
 
         //Location for text bubbles. You can adjust it as necessary later. For most characters, these values are fine.
         dialogX = (drawX + 0.0F * Settings.scale);
@@ -154,7 +156,7 @@ public class TheWarforged extends CustomPlayer {
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
         //IDs of starting relics. You can have multiple, but one is recommended.
-        retVal.add(BurningBlood.ID);
+        retVal.add(CrackedAetherheartRelic_Warforged.ID);
 
         return retVal;
     }
