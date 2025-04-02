@@ -6,29 +6,37 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import thewarforged.relics.starterRelics.CrackedAetherheartRelic_Warforged;
 
 public class GainEnergyAction_Warforged extends GainEnergyAction {
-    private final boolean wasTriggeredByCardPlay;
+    private final boolean shouldDelayAetherburn;
 
     public GainEnergyAction_Warforged(int amount) {
         super(amount);
-        this.wasTriggeredByCardPlay = true;
+        this.shouldDelayAetherburn = false;
     }
 
-    public GainEnergyAction_Warforged(int amount, boolean wasTriggeredByCardPlay) {
+    public GainEnergyAction_Warforged(int amount, boolean shouldDelayAetherburn) {
         super(amount);
-        this.wasTriggeredByCardPlay = wasTriggeredByCardPlay;
+        this.shouldDelayAetherburn = shouldDelayAetherburn;
     }
 
     @Override
     public void update() {
         super.update();
-        //If this Warforged-specific GainEnergyAction was triggered by a card being played by the Warforged,
-        if (this.wasTriggeredByCardPlay) {
-            // then find its Cracked Aetherheart relic and trigger Aetherburn.
-            AbstractRelic crackedAetherheartRelic =
-                    AbstractDungeon.player.getRelic("${modID}:CrackedAetherheartRelic_Warforged");
-            if (crackedAetherheartRelic instanceof CrackedAetherheartRelic_Warforged) {
-                ((CrackedAetherheartRelic_Warforged) crackedAetherheartRelic).runawayAetherheart_Aetherburn();
-            }
+        //Find the character's Cracked Heart relic.
+        AbstractRelic crackedAetherheartRelic =
+                AbstractDungeon.player.getRelic(CrackedAetherheartRelic_Warforged.ID);
+        //If it could not be found, then we're done here.
+        if (!(crackedAetherheartRelic instanceof CrackedAetherheartRelic_Warforged)) return;
+
+        //If this Warforged-specific GainEnergyAction should delay the aetherburn trigger,
+        if (this.shouldDelayAetherburn) {
+            // then create an action that will trigger it and add it to the bottom of the queue.
+            TriggerAetherburnAction_Warforged triggerAetherburnAction_warforged =
+                    new TriggerAetherburnAction_Warforged( (CrackedAetherheartRelic_Warforged) crackedAetherheartRelic);
+            this.addToBot(triggerAetherburnAction_warforged);
+            //Else, trigger is immediately.
+        } else {
+            ((CrackedAetherheartRelic_Warforged) crackedAetherheartRelic).runawayAetherheart_Aetherburn();
         }
+        this.isDone = true;
     }
 }

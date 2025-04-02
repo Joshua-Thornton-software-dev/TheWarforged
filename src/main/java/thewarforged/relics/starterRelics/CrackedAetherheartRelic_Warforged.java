@@ -1,5 +1,7 @@
 package thewarforged.relics.starterRelics;
 
+import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
@@ -16,7 +18,11 @@ import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import thewarforged.actions.utilactions.GainEnergyAction_Warforged;
+import thewarforged.character.TheWarforged;
+import thewarforged.core.EnergyManager_Warforged;
 import thewarforged.relics.AbstractWarforgedRelic;
+import thewarforged.util.CardStats;
+import thewarforged.util.GeneralUtils;
 
 import static thewarforged.TheWarforgedMod.makeID;
 
@@ -63,8 +69,21 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
     }
 
     @Override
-    public void atPreBattle() {
+    public String getUpdatedDescription() {
+        return this.DESCRIPTIONS[0];
+    }
 
+    @Override
+    public void atPreBattle() {
+        this.ensureCustomEnergyManager();
+        this.setPowers(this.STARTING_DEX, this.STARTING_STR);
+    }
+
+    @Override
+    public void atTurnStart() {
+        //Reset the overload counter and energyGain.
+        this.numCardsPlayed = 0;
+        this.currentEnergyGain = STARTING_ENERGY_GAIN;
     }
 
     /**
@@ -74,7 +93,7 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
      */
     @Override
     public void onPlayCard(AbstractCard card, AbstractMonster monster) {
-        //TODO: Set starting stuff.
+
     }
 
     /**
@@ -88,8 +107,10 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
         this.runawayAetherheart_IncreaseCharge(targetCard, useCardAction);
         //If the number of cards played is NOT back to 0 (after being tracked and possibly reset above),
         if (this.numCardsPlayed != 0) {
-            // then this card was NOT the overload (copy) card, and therefore counts for energy gain/aetherburn.
-            this.runawayAetherheart_GainEnergy();
+            // then this card was NOT the overload (copy) card, and therefore counts for energy
+            // gain/aetherburn. Delay the aetherburn for X_COST cards, though.
+            boolean shouldDelayAetherburn = (targetCard.cost == CardStats.X_COST());
+            this.runawayAetherheart_GainEnergy(shouldDelayAetherburn);
         }
     }
 
@@ -98,10 +119,36 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
      * The character gains energy. The amount gained increases dramatically as they play
      * more and more cards in the same turn.
      */
-    private void runawayAetherheart_GainEnergy() {
+    private void runawayAetherheart_GainEnergy(boolean shouldDelayAetherburn) {
+
         //This action will trigger aetherburn after the energy is gained.
-        GainEnergyAction_Warforged gainEnergyAction = new GainEnergyAction_Warforged(this.currentEnergyGain);
+        GainEnergyAction_Warforged gainEnergyAction =
+                new GainEnergyAction_Warforged(this.currentEnergyGain, shouldDelayAetherburn);
         this.addToTop(gainEnergyAction);
+    }
+
+    /**
+     * Handles the HP loss triggered by having too much energy after playing a card. The energy gained by
+     * playing a card via this relic is included in this calculation, and this method is called by that custom
+     * GainEnergyAction_Warforged after the energy is applied. Once aetherburn is handled, this method calls
+     * runawayAetherheart_BalancePowers() to adjust the character's Dex/Str according to the new energy level.
+     */
+    public void runawayAetherheart_Aetherburn() {
+        // Determine how much energy the character has past the maximum safe amount.
+        int currEnergy = EnergyPanel.getCurrentEnergy();
+        int aetherburn = currEnergy - MAX_SAFE_ENERGY;
+        // If there was enough energy to cause damage, cause the character to lose that much HP.
+        if (aetherburn > 0) {
+            LoseHPAction aetherburnAction = new LoseHPAction(
+                    this.player(),
+                    this.player(),
+                    aetherburn,
+                    AbstractGameAction.AttackEffect.LIGHTNING);
+            this.addToBot(aetherburnAction);
+        }
+
+        //After handling aetherburn, balance the character's Dex/Str based on new energy levels.
+        this.runawayAetherheart_BalancePowers();
     }
 
     /**
@@ -113,7 +160,7 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
         int newStr;
 
         int currEnergy = EnergyPanel.getCurrentEnergy();
-        int currEnergyTier = currEnergy / this.NUM_ENERGY_PER_TIER;
+        int currEnergyTier = MathUtils.floor((float) (currEnergy / this.NUM_ENERGY_PER_TIER));
 
         newDex = this.STARTING_DEX - currEnergyTier;
         newStr = this.STARTING_STR + currEnergyTier;
@@ -139,9 +186,10 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
         int dexDiff = newDex - this.numDexApplied;
         //If the amount of Dex needs to drop, and they already have some Dex (either positive or negative),
         if (dexDiff < 0 && existingDexPower != null) {
-            // then reduce the character's Dex power by that much.
+            // then reduce the character's Dex power by that much. This action needs a positive number to know
+            // how much to reduce the power by, but dexDiff is guaranteed to be negative, so we make it positive.
             ReducePowerAction reducePowerAction =
-                    new ReducePowerAction(this.player(), this.player(), existingDexPower, dexDiff);
+                    new ReducePowerAction(this.player(), this.player(), existingDexPower, (dexDiff * -1));
             this.addToBot(reducePowerAction);
             // Else, either no change is required, or the character does not have any Dex at the moment.
             // If a change is Dex is required,
@@ -161,7 +209,7 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
         int strDiff = newStr - this.numStrApplied;
         if (strDiff < 0 && existingStrPower != null) {
             ReducePowerAction reducePowerAction =
-                    new ReducePowerAction(this.player(), this.player(), existingStrPower, strDiff);
+                    new ReducePowerAction(this.player(), this.player(), existingStrPower, (strDiff * -1));
             this.addToBot(reducePowerAction);
         } else if (strDiff != 0) {
             StrengthPower newStrPower = new StrengthPower(this.player(), strDiff);
@@ -170,14 +218,6 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
             this.addToBot(powerAction);
         }
         this.numStrApplied += strDiff;
-    }
-
-    public void runawayAetherheart_Aetherburn() {
-        int currEnergy = EnergyPanel.getCurrentEnergy();
-        int burnAmount = currEnergy - MAX_SAFE_ENERGY;
-        if (burnAmount > 0) {
-            this.addToBot(new LoseHPAction(this.player(), this.player(), burnAmount));
-        }
     }
 
     /**
@@ -233,5 +273,11 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
         targetCard.purgeOnUse = true;
         CardQueueItem cardQueueItem = new CardQueueItem(tempCard, monster, targetCard.energyOnUse, true, true);
         this.actionManager().addCardQueueItem(cardQueueItem, true);
+    }
+
+    private void ensureCustomEnergyManager() {
+        if (!(this.player().energy instanceof EnergyManager_Warforged)) {
+            this.player().energy = new EnergyManager_Warforged(EnergyPanel.getCurrentEnergy());
+        }
     }
 }

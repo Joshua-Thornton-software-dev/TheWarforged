@@ -1,8 +1,14 @@
 package thewarforged.patches;
 
+import com.evacipated.cardcrawl.modthespire.lib.SpireInstrumentPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
+import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
+import javassist.CannotCompileException;
+import javassist.expr.ExprEditor;
+import javassist.expr.MethodCall;
+import thewarforged.util.GeneralUtils;
 
 public class EnergyPanelPatches {
 
@@ -63,4 +69,22 @@ public class EnergyPanelPatches {
             onEnergyChanged();
         }
     }
+
+//    @SpirePatch2(
+//            clz = EnergyManager.class,
+//            method = "recharge"
+//    )
+//    public static class CheckWarforgedRelicDuringRechargePatch {
+//        public CheckWarforgedRelicDuringRechargePatch() {
+//        }
+//
+//        @SpireInstrumentPatch
+//        public static ExprEditor Instrument() {
+//            return new ExprEditor() {
+//                public void edit(MethodCall m) throws CannotCompileException {
+//                    if (m.getMethodName().equals("recharge"))
+//                }
+//            };
+//        }
+//    }
 }
