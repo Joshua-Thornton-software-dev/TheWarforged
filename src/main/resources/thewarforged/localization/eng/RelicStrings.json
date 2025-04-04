@@ -18,5 +18,16 @@
       " NL #yAetherburn: After playing a card, lose HP for each [E] past ",
       "."
     ]
+  },
+  "${modID}:BiocircuitryRelic_Warforged": {
+    "NAME": "Biocircuitry",
+    "FLAVOR": "The mechanism by which the Aetherheart powers the body. Doubles as a nervous system.\nSensitive to power fluctuations.",
+    "DESCRIPTIONS": [
+      "#yNeural #yDysrhythmia: Start each combat with ",
+      " #yDexterity and ",
+      " #yStrength.",
+      " NL #yPower #yFluctuations: For every ",
+      " [E] you have above 0, you have -1 #yDexterity and +1 #yStrength."
+    ]
   }
 }

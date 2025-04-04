@@ -23,6 +23,7 @@ import thewarforged.cards.attackCards.Strike_Warforged;
 import thewarforged.cards.skillCards.Defend_Warforged;
 import thewarforged.cards.skillCards.RaiseShields_Warforged;
 import thewarforged.core.EnergyManager_Warforged;
+import thewarforged.relics.starterRelics.BiocircuitryRelic_Warforged;
 import thewarforged.relics.starterRelics.CrackedAetherheartRelic_Warforged;
 
 import java.util.ArrayList;
@@ -157,6 +158,7 @@ public class TheWarforged extends CustomPlayer {
         ArrayList<String> retVal = new ArrayList<>();
         //IDs of starting relics. You can have multiple, but one is recommended.
         retVal.add(CrackedAetherheartRelic_Warforged.ID);
+        retVal.add(BiocircuitryRelic_Warforged.ID);
 
         return retVal;
     }
