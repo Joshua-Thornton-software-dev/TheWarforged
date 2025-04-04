@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import thewarforged.actions.utilactions.GainEnergyAction_Warforged;
-import thewarforged.core.EnergyManager_Warforged;
 import thewarforged.relics.AbstractWarforgedRelic;
 import thewarforged.util.CardStats;
 
@@ -35,31 +34,24 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
     private final int OVERLOAD_ENERGY_GAIN_MULTIPLIER = 2;
     private int currentEnergyGain = STARTING_ENERGY_GAIN;
 
+    private GameActionManager actionManager() {
+        return AbstractDungeon.actionManager;
+    }
+
     public CrackedAetherheartRelic_Warforged() {
         //The second argument, NAME, is the name of both this relic and the image for this relic.
         super(ID, NAME, RARITY, LANDING_SOUND);
     }
 
-    private GameActionManager actionManager() {
-        return AbstractDungeon.actionManager;
-    }
-
     @Override
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0]
-                + DESCRIPTIONS[1]
-                + DESCRIPTIONS[2]
+                + this.DESCRIPTIONS[1]
                 + this.NUM_CARDS_FOR_OVERLOAD
-                + DESCRIPTIONS[3]
-                + DESCRIPTIONS[4]
-                + DESCRIPTIONS[5]
+                + this.DESCRIPTIONS[2]
+                + this.DESCRIPTIONS[3]
                 + this.MAX_SAFE_ENERGY
-                + DESCRIPTIONS[6];
-    }
-
-    @Override
-    public void atPreBattle() {
-        this.ensureCustomEnergyManager();
+                + this.DESCRIPTIONS[4];
     }
 
     @Override
@@ -173,18 +165,5 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
         targetCard.purgeOnUse = true;
         CardQueueItem cardQueueItem = new CardQueueItem(tempCard, monster, targetCard.energyOnUse, true, true);
         this.actionManager().addCardQueueItem(cardQueueItem, true);
-    }
-
-    /**
-     * Ensure that the character is using the custom energy manager meant for the Warforged, and set its energy
-     * gained per turn to 0 as the relic intends. I allowed the default to be 3 just in case the Warforged was ever
-     * played without this relic for some reason.
-     */
-    private void ensureCustomEnergyManager() {
-        if (!(this.player().energy instanceof EnergyManager_Warforged)) {
-            this.player().energy = new EnergyManager_Warforged(EnergyPanel.getCurrentEnergy());
-        }
-        this.player().energy.energyMaster = 0;
-        this.player().energy.energy = 0;
     }
 }
