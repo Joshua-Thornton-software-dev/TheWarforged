@@ -4,17 +4,13 @@ import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import thewarforged.relics.starterRelics.BiocircuitryRelic_Warforged;
 import thewarforged.relics.starterRelics.CrackedAetherheartRelic_Warforged;
 
 public class GainEnergyAction_Warforged extends GainEnergyAction {
     private final boolean shouldDelayAetherburn;
 
-    private AbstractPlayer _player;
-
     private AbstractPlayer player() {
-        if (this._player == null) this._player = AbstractDungeon.player;
-        return this._player;
+        return AbstractDungeon.player;
     }
 
     public GainEnergyAction_Warforged(int amount) {
@@ -50,17 +46,6 @@ public class GainEnergyAction_Warforged extends GainEnergyAction {
             } else {
                 ((CrackedAetherheartRelic_Warforged) crackedAetherheartRelic).volatileAether_Aetherburn();
             }
-        }
-    }
-
-    private void handleTriggerBiocircuitryBalance() {
-        //Find the character's Biocircuitry relic.
-        AbstractRelic biocircuitryRelic_warforged =
-                this.player().getRelic(BiocircuitryRelic_Warforged.ID);
-        //If we found one,
-        if (biocircuitryRelic_warforged instanceof BiocircuitryRelic_Warforged) {
-            // then call its method to balance its power.
-            ((BiocircuitryRelic_Warforged) biocircuitryRelic_warforged).powerFluctuations_BalancePowers();
         }
     }
 }

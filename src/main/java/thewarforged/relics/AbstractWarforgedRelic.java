@@ -1,6 +1,7 @@
 package thewarforged.relics;
 
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewarforged.character.TheWarforged;
 
 public abstract class AbstractWarforgedRelic extends BaseRelic {
@@ -20,6 +21,10 @@ public abstract class AbstractWarforgedRelic extends BaseRelic {
         super(id, imageName, TheWarforged.Meta.CARD_COLOR, tier, sfx);
     }
 
+    protected AbstractPlayer player() {
+        return AbstractDungeon.player;
+    }
+
     /**
      * This constructor is used for general relics.
      * @param id The ID of this relic, made in each relic class with `makeID(NAME)`
@@ -31,5 +36,8 @@ public abstract class AbstractWarforgedRelic extends BaseRelic {
             RelicTier tier,
             LandingSound sfx) {
         super(id, tier, sfx);
+    }
+
+    public void onEnergyChanged() {
     }
 }
