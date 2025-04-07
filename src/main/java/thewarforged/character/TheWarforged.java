@@ -23,9 +23,8 @@ import thewarforged.cards.attackCards.Strike_Warforged;
 import thewarforged.cards.skillCards.Defend_Warforged;
 import thewarforged.cards.skillCards.RaiseShields_Warforged;
 import thewarforged.core.EnergyManager_Warforged;
-import thewarforged.relics.starterRelics.BiocircuitryRelic_Warforged;
 import thewarforged.relics.starterRelics.CrackedAetherheartRelic_Warforged;
-import thewarforged.relics.starterRelics.LivingConstructRelic_Warforged;
+import thewarforged.relics.starterRelics.DiagnosticsRelic_Warforged;
 
 import java.util.ArrayList;
 
@@ -157,11 +156,9 @@ public class TheWarforged extends CustomPlayer {
     @Override
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        //Add the IDs of each starting relic. This character changes how the game is played pretty drastically,
-        // so 3 starting relics were needed to get all the mechanics into readable, easy-to-digest segments.
-        retVal.add(LivingConstructRelic_Warforged.ID);
-        retVal.add(CrackedAetherheartRelic_Warforged.ID); //Examine text still too long! I need it to scroll...
-        retVal.add(BiocircuitryRelic_Warforged.ID);
+        //Add the IDs of each starting relic.
+        retVal.add(CrackedAetherheartRelic_Warforged.ID);
+        retVal.add(DiagnosticsRelic_Warforged.ID);
 
         return retVal;
     }

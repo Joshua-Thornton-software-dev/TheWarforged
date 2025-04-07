@@ -62,6 +62,15 @@
     "DESCRIPTION": "Every 6th card played in a turn is played twice. The copy does not trigger #yVolatile #yAether or #yAetherburn."
   },
   {
+    "REPLACEMENT_PART": "Replacement Part",
+    "NAMES": [
+      "replacement part",
+      "replacement_part",
+      "replacement_parts"
+    ],
+    "DESCRIPTION": "#yReplacement #yPart cards can provide bonuses by being in your deck, such as via the #yDiagnostics.json relic. Adding multiple copies of #yReplacement #yPart cards to your deck will not increase these benefits."
+  },
+  {
     "VOLATILE_AETHER": "Volatile Aether",
     "NAMES": [
       "volatile aether",

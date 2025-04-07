@@ -1,18 +1,13 @@
 package thewarforged.relics.starterRelics;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardQueueItem;
-import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import thewarforged.actions.utilactions.GainEnergyAction_Warforged;
+import thewarforged.core.EnergyManager_Warforged;
 import thewarforged.relics.AbstractWarforgedRelic;
-import thewarforged.util.CardStats;
 
 import static thewarforged.TheWarforgedMod.makeID;
 
@@ -23,22 +18,18 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
     private static final RelicTier RARITY = RelicTier.STARTER;
     private static final LandingSound LANDING_SOUND = LandingSound.CLINK;
 
-    private static final int BASE_MAX_SAFE_ENERGY = 6;
-    private static final int BASE_DAMAGE_PER_EXTRA_ENERGY = 1;
-    public static int maxSafeEnergy = BASE_MAX_SAFE_ENERGY;
-    public static int damagePerExtraEnergy = BASE_DAMAGE_PER_EXTRA_ENERGY;
+    private final int BASE_MAX_SAFE_ENERGY = 3;
+    private int maxSafeEnergy = this.BASE_MAX_SAFE_ENERGY;
 
-    private final int NUM_CARDS_FOR_OVERLOAD = 6;
-    private final int NUM_CARDS_FOR_RESET = NUM_CARDS_FOR_OVERLOAD + 1;
+    private final int DAMAGE_PER_ENERGY_PAST_MAX = 1;
+
     private int numCardsPlayed = 0;
+    private final int BASE_ENERGY_RAMP_MARKER = 3;
+    private int energyRampMarker = this.BASE_ENERGY_RAMP_MARKER;
 
-    private static final int STARTING_ENERGY_GAIN = 1;
-    private static final int OVERLOAD_ENERGY_GAIN_MULTIPLIER = 2;
-    public static int currentEnergyGain = STARTING_ENERGY_GAIN;
-
-    private GameActionManager actionManager() {
-        return AbstractDungeon.actionManager;
-    }
+    private final int STARTING_ENERGY_GAIN = 1;
+    private final int ENERGY_RAMP_MULTIPLIER = 2;
+    private int currentEnergyGain = STARTING_ENERGY_GAIN;
 
     public CrackedAetherheartRelic_Warforged() {
         //The second argument, NAME, is the name of both this relic and the image for this relic.
@@ -51,10 +42,16 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
     }
 
     @Override
+    public void atPreBattle() {
+        this.ensureCustomEnergyManager();
+        this.setEnergyPerTurn();
+    }
+
+    @Override
     public void atTurnStart() {
         //Reset the overload counter and energyGain.
         this.numCardsPlayed = 0;
-        currentEnergyGain = STARTING_ENERGY_GAIN;
+        this.currentEnergyGain = STARTING_ENERGY_GAIN;
     }
 
     /**
@@ -64,14 +61,10 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
      */
     @Override
     public void onUseCard(AbstractCard targetCard, UseCardAction useCardAction) {
-        //A card was played! Track the number of cards played for the overload mechanic.
-        this.volatileAether_IncreaseCharge(targetCard, useCardAction);
-        //If the number of cards played is NOT back to 0 (after being tracked and possibly reset above),
-        if (this.numCardsPlayed != 0) {
-            // then this card was NOT the overload (copy) card, and therefore counts for energy
-            // gain/aetherburn. Delay the aetherburn for X_COST cards, though.
-            boolean shouldDelayAetherburn = (targetCard.cost == CardStats.X_COST());
-            this.volatileAether_GainEnergy(shouldDelayAetherburn);
+        //A card was played! Track the number of cards played.
+        this.numCardsPlayed++;
+        if (this.numCardsPlayed % this.energyRampMarker == 0) {
+            this.currentEnergyGain *= this.ENERGY_RAMP_MULTIPLIER;
         }
     }
 
@@ -84,7 +77,7 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
 
         //This action will trigger aetherburn after the energy is gained.
         GainEnergyAction_Warforged gainEnergyAction =
-                new GainEnergyAction_Warforged(currentEnergyGain, shouldDelayAetherburn);
+                new GainEnergyAction_Warforged(this.currentEnergyGain, shouldDelayAetherburn);
         this.addToTop(gainEnergyAction);
     }
 
@@ -96,7 +89,7 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
     public void volatileAether_Aetherburn() {
         // Determine how much energy the character has past the maximum safe amount.
         int currEnergy = EnergyPanel.getCurrentEnergy();
-        int aetherburn = currEnergy - BASE_MAX_SAFE_ENERGY;
+        int aetherburn = currEnergy - this.maxSafeEnergy;
         // If there was enough energy to cause damage, cause the character to lose that much HP.
         if (aetherburn > 0) {
             LoseHPAction aetherburnAction = new LoseHPAction(
@@ -109,57 +102,19 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
     }
 
     /**
-     * The aetherheart's energy builds toward an inevitable release of power!
-     * Tracks the number of cards played and, once it reaches a certain points, overloads the last card.
-     * Then the amount of energy gained per card played increases (multiplicative).
-     * @param targetCard The card that was last played by the character
+     * Ensure that the character is using the custom energy manager meant for the Warforged.
+     * I allowed the default to be 3 just in case the Warforged was ever played without this relic
+     * for some reason.
      */
-    private void volatileAether_IncreaseCharge(AbstractCard targetCard, UseCardAction useCardAction) {
-        this.numCardsPlayed++;
-        if (numCardsPlayed == this.NUM_CARDS_FOR_OVERLOAD) {
-            //Overload this card and double the amount of energy gained per card played.
-            this.volatileAether_Overload(targetCard, useCardAction);
-            currentEnergyGain *= OVERLOAD_ENERGY_GAIN_MULTIPLIER;
-            //If this is the card played immediately after overloading a card,
-        } else if (numCardsPlayed == this.NUM_CARDS_FOR_RESET) {
-            // then this is the overloaded card's copy. It does not count towards the next overload. Reset.
-            this.numCardsPlayed = 0;
+    private void ensureCustomEnergyManager() {
+        //The custom energy manager is required
+        if (!(this.player().energy instanceof EnergyManager_Warforged)) {
+            this.player().energy = new EnergyManager_Warforged(EnergyPanel.getCurrentEnergy());
         }
     }
 
-    /**
-     * The aetherheart cannot hold the energy any longer. It demands to be released.
-     * Duplicates the target card.
-     * @param targetCard The card to duplicate
-     */
-    private void volatileAether_Overload(AbstractCard targetCard, UseCardAction useCardAction) {
-        //This follows the pattern shown in EchoPower.class, which doubles a card the same way overload should.
-        this.flash();
-        //Get the monster target of the card being copied, if one exists.
-        AbstractMonster monster = null;
-        if (useCardAction.target != null) {
-            monster = (AbstractMonster)useCardAction.target;
-        }
-
-        //Create the copy.
-        AbstractCard tempCard = targetCard.makeSameInstanceOf();
-        //Then place it into... limbo? I have no idea, but it's what EchoPower does. I will trust it for now.
-        this.player().limbo.addToBottom(tempCard);
-        //The rest of this section seems to be setting variables for screen placement/animation.
-        tempCard.current_x = targetCard.current_x;
-        tempCard.current_y = targetCard.current_y;
-        tempCard.target_x = (float) Settings.WIDTH / 2.0F - 300.0F * Settings.scale;
-        tempCard.target_y = (float) Settings.HEIGHT / 2.0F;
-
-        //Calculate damage if there is a monster to calculate against. I assume this does nothing if the card
-        // being copied targets a monster without damaging it. I haven't looked into it yet.
-        if (monster != null) {
-            tempCard.calculateCardDamage(monster);
-        }
-
-        //Ensure that this copy will disappear after being played, rather than added to the dungeon deck.
-        targetCard.purgeOnUse = true;
-        CardQueueItem cardQueueItem = new CardQueueItem(tempCard, monster, targetCard.energyOnUse, true, true);
-        this.actionManager().addCardQueueItem(cardQueueItem, true);
+    private void setEnergyPerTurn() {
+        this.player().energy.energyMaster = 0;
+        this.player().energy.energy = 0;
     }
 }
