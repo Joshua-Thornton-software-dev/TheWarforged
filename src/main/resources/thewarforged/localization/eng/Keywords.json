@@ -21,6 +21,14 @@
     "DESCRIPTION": "Make sure the first element in NAMES has no underscores. The rest should use _ in the place of spaces. In card text, you'll use the underscore versions."
   },
   {
+    "AETHERBURN": "Aetherburn",
+    "NAMES": [
+      "aetherburn",
+      "aetherburned"
+    ],
+    "DESCRIPTION": "After playing a card, lose HP equal to the number of [E] you have past 3. (This number can be affected by powers and relics)"
+  },
+  {
     "ENERGY_SHIELDS": "Energy Shields",
     "NAMES": [
       "energy shield",
@@ -36,5 +44,29 @@
       "ionize"
     ],
     "DESCRIPTION": "For each attack, also take half that attack's damage (rounded down) and reduce Ionize by 1."
+  },
+  {
+    "LIVING_CONSTRUCT": "Living Construct",
+    "NAMES": [
+      "living construct",
+      "living_construct"
+    ],
+    "DESCRIPTION": "You gain no energy at the start of your turn, and energy is conserved between turns."
+  },
+  {
+    "OVERLOAD": "Overload",
+    "NAMES": [
+      "overload",
+      "overloaded"
+    ],
+    "DESCRIPTION": "Every 6th card played in a turn is played twice. The copy does not trigger #yVolatile #yAether or #yAetherburn."
+  },
+  {
+    "VOLATILE_AETHER": "Volatile Aether",
+    "NAMES": [
+      "volatile aether",
+      "volatile_aether"
+    ],
+    "DESCRIPTION": "Gain [E] after playing a card. The number of [E] gained doubles every 3 cards played and resets each turn."
   }
 ]

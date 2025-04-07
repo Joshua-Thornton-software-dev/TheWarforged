@@ -21,11 +21,7 @@
     "NAME": "Cracked Aetherheart",
     "FLAVOR": "The soul of an automaton, damaged from the lightning of an aetherstorm.\nGenerates energy uncontrollably.",
     "DESCRIPTIONS": [
-      "#yVolatile #yAether: Gain [E] whenever you play any card. This doubles every time a card is overloaded that turn",
-      " NL #yOverload: Every ",
-      "th card played is played twice.",
-      " NL #yAetherburn: After playing a card, lose HP for each [E] past ",
-      "."
+      "You have these traits: NL #ythewarforged:Volatile_Aether NL #ythewarforged:Aetherburn NL #ythewarforged:Overload"
     ]
   },
   "${modID}:LivingConstructRelic_Warforged": {

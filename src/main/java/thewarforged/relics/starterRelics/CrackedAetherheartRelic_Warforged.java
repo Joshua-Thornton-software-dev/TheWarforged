@@ -23,16 +23,18 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
     private static final RelicTier RARITY = RelicTier.STARTER;
     private static final LandingSound LANDING_SOUND = LandingSound.CLINK;
 
-    private final int MAX_SAFE_ENERGY = 6;
-    private final int DAMAGE_PER_ENERGY_PAST_MAX = 1;
+    private static final int BASE_MAX_SAFE_ENERGY = 6;
+    private static final int BASE_DAMAGE_PER_EXTRA_ENERGY = 1;
+    public static int maxSafeEnergy = BASE_MAX_SAFE_ENERGY;
+    public static int damagePerExtraEnergy = BASE_DAMAGE_PER_EXTRA_ENERGY;
 
     private final int NUM_CARDS_FOR_OVERLOAD = 6;
     private final int NUM_CARDS_FOR_RESET = NUM_CARDS_FOR_OVERLOAD + 1;
     private int numCardsPlayed = 0;
 
-    private final int STARTING_ENERGY_GAIN = 1;
-    private final int OVERLOAD_ENERGY_GAIN_MULTIPLIER = 2;
-    private int currentEnergyGain = STARTING_ENERGY_GAIN;
+    private static final int STARTING_ENERGY_GAIN = 1;
+    private static final int OVERLOAD_ENERGY_GAIN_MULTIPLIER = 2;
+    public static int currentEnergyGain = STARTING_ENERGY_GAIN;
 
     private GameActionManager actionManager() {
         return AbstractDungeon.actionManager;
@@ -45,20 +47,14 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
 
     @Override
     public String getUpdatedDescription() {
-        return this.DESCRIPTIONS[0]
-                + this.DESCRIPTIONS[1]
-                + this.NUM_CARDS_FOR_OVERLOAD
-                + this.DESCRIPTIONS[2]
-                + this.DESCRIPTIONS[3]
-                + this.MAX_SAFE_ENERGY
-                + this.DESCRIPTIONS[4];
+        return this.DESCRIPTIONS[0];
     }
 
     @Override
     public void atTurnStart() {
         //Reset the overload counter and energyGain.
         this.numCardsPlayed = 0;
-        this.currentEnergyGain = STARTING_ENERGY_GAIN;
+        currentEnergyGain = STARTING_ENERGY_GAIN;
     }
 
     /**
@@ -88,7 +84,7 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
 
         //This action will trigger aetherburn after the energy is gained.
         GainEnergyAction_Warforged gainEnergyAction =
-                new GainEnergyAction_Warforged(this.currentEnergyGain, shouldDelayAetherburn);
+                new GainEnergyAction_Warforged(currentEnergyGain, shouldDelayAetherburn);
         this.addToTop(gainEnergyAction);
     }
 
@@ -100,7 +96,7 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
     public void volatileAether_Aetherburn() {
         // Determine how much energy the character has past the maximum safe amount.
         int currEnergy = EnergyPanel.getCurrentEnergy();
-        int aetherburn = currEnergy - MAX_SAFE_ENERGY;
+        int aetherburn = currEnergy - BASE_MAX_SAFE_ENERGY;
         // If there was enough energy to cause damage, cause the character to lose that much HP.
         if (aetherburn > 0) {
             LoseHPAction aetherburnAction = new LoseHPAction(
@@ -123,7 +119,7 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
         if (numCardsPlayed == this.NUM_CARDS_FOR_OVERLOAD) {
             //Overload this card and double the amount of energy gained per card played.
             this.volatileAether_Overload(targetCard, useCardAction);
-            this.currentEnergyGain *= this.OVERLOAD_ENERGY_GAIN_MULTIPLIER;
+            currentEnergyGain *= OVERLOAD_ENERGY_GAIN_MULTIPLIER;
             //If this is the card played immediately after overloading a card,
         } else if (numCardsPlayed == this.NUM_CARDS_FOR_RESET) {
             // then this is the overloaded card's copy. It does not count towards the next overload. Reset.
