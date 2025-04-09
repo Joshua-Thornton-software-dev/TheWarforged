@@ -1,5 +1,6 @@
 package thewarforged.powers;
 
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import thewarforged.util.GeneralUtils;
 import thewarforged.util.TextureLoader;
 import com.badlogic.gdx.graphics.Color;
@@ -83,5 +84,9 @@ public abstract class BasePower extends AbstractPower {
 
             FontHelper.renderFontRightTopAligned(sb, FontHelper.powerAmountFont, Integer.toString(this.amount2), x, y + 15.0F * Settings.scale, this.fontScale, c);
         }
+    }
+
+    @Override
+    public void wasHPLost(DamageInfo info, int damageAmount) {
     }
 }
