@@ -7,6 +7,8 @@ import static thewarforged.util.TextureLoader.getCardTextureString;
 
 public abstract class AbstractWarforgedCard extends BaseCard {
 
+    public boolean isReplacementCard = false;
+
     public AbstractWarforgedCard(String ID, CardStats info) {
         super(ID, info, getCardTextureString(removePrefix(ID), info.cardType));
     }
