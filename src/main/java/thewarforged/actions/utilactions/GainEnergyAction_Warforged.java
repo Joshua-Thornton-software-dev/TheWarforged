@@ -18,6 +18,14 @@ public class GainEnergyAction_Warforged extends GainEnergyAction {
         this.shouldDelayAetherburn = false;
     }
 
+    /**
+     * Adds energy to the character and calls the Cracked Aetherheart's Aetherburn method.
+     * @param amount The amount of energy to be gained
+     * @param shouldDelayAetherburn Whether the Aetherburn call should be delayed with an action of the
+     *                              bottom of the queue, rather than being called immediately following
+     *                              the energy gain. Set this to true when the card that triggered this
+     *                              energy gain was an X_COST card.
+     */
     public GainEnergyAction_Warforged(int amount, boolean shouldDelayAetherburn) {
         super(amount);
         this.shouldDelayAetherburn = shouldDelayAetherburn;

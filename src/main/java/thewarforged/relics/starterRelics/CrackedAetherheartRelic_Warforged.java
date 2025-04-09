@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import thewarforged.actions.utilactions.GainEnergyAction_Warforged;
 import thewarforged.core.EnergyManager_Warforged;
 import thewarforged.relics.AbstractWarforgedRelic;
+import thewarforged.util.CardStats;
 
 import static thewarforged.TheWarforgedMod.makeID;
 
@@ -63,6 +64,12 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
     public void onUseCard(AbstractCard targetCard, UseCardAction useCardAction) {
         //A card was played! Track the number of cards played.
         this.numCardsPlayed++;
+
+        //Gain energy for playing a card. Delay the subsequent Aetherburn until after the card's
+        // effect if that card is an X_COST card.
+        this.volatileAether_GainEnergy(targetCard.cost == CardStats.X_COST());
+
+        //Ramp up the energy gained per card played if appropriate.
         if (this.numCardsPlayed % this.energyRampMarker == 0) {
             this.currentEnergyGain *= this.ENERGY_RAMP_MULTIPLIER;
         }
