@@ -13,10 +13,12 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
+import com.megacrit.cardcrawl.vfx.TextAboveCreatureEffect;
 import thewarforged.cards.attackCards.AetherDischarge_Warforged;
 import thewarforged.cards.attackCards.DirectCurrent_Warforged;
 import thewarforged.cards.attackCards.Strike_Warforged;
@@ -263,5 +265,21 @@ public class TheWarforged extends CustomPlayer {
     public AbstractPlayer newInstance() {
         //Makes a new instance of your character class.
         return new TheWarforged();
+    }
+
+    /**
+     * Applies a negative affect to the decrease of max HP. Sound effects are left to individual usages, such as
+     * the Parasite curse card.
+     * @param amount The amount of max HP to remove from the player
+     */
+    @Override
+    public void decreaseMaxHealth(int amount) {
+        super.decreaseMaxHealth(amount);
+        AbstractDungeon.effectsQueue.add(
+                new TextAboveCreatureEffect(
+                        this.hb.cX - this.animX,
+                        this.hb.cY,
+                        "Max HP -" + amount,
+                        Settings.RED_TEXT_COLOR));
     }
 }
