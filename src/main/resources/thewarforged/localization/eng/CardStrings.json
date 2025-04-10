@@ -22,6 +22,10 @@
     "NAME": "Direct Current",
     "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:Ionized."
   },
+  "${modID}:Gyrospine_Warforged": {
+    "NAME": "Gyrospine",
+    "DESCRIPTION": "${modID}:Replacement_Part NL The next time you fall to half health or less, gain !M! Regen."
+  },
   "${modID}:RaiseShields_Warforged": {
     "NAME": "Raise Shields",
     "DESCRIPTION": "Gain !B! ${modID}:Energy_Shield !M! times. NL Dexterity affects this card."
