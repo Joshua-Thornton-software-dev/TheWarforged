@@ -38,6 +38,10 @@
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! damage."
   },
+  "${modID}:VeryParticularScrew_Warforged": {
+    "NAME": "Very Particular Screw",
+    "DESCRIPTION": "${modID}:Replacement_Part NL At the end of your turn, gain !M! Block."
+  },
 
 
 
