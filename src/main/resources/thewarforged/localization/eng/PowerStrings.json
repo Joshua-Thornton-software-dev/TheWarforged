@@ -19,5 +19,13 @@
       "Whenever this creature attacks, it takes",
       " damage equal to half of the attack damage (rounded down), then #yIonized is reduced by 1. This damage can be blocked."
     ]
+  },
+  "${modID}:StableShieldsPower_Warforged": {
+    "NAME": "Stable Shields",
+    "DESCRIPTIONS": [
+      "#yEnergy #yShield is not lost at the start of your next turn.",
+      "#yEnergy #yShield is not lost at the start of your next #b",
+      " turns."
+    ]
   }
 }

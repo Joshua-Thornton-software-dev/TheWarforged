@@ -30,6 +30,10 @@
     "NAME": "Raise Shields",
     "DESCRIPTION": "Gain !B! ${modID}:Energy_Shield !M! times. NL Dexterity affects this card."
   },
+  "${modID}:StabilizeShields_Warforged": {
+    "NAME": "Stabilize Shields",
+    "DESCRIPTION": "Gain !B! ${modID}:Energy_Shield. NL ${modID}:Energy_Shield is not lost at the start of your next turn."
+  },
   "${modID}:Strike_Warforged": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! damage."
