@@ -26,6 +26,10 @@
     "NAME": "Gyrospine",
     "DESCRIPTION": "${modID}:Replacement_Part NL The next time you fall to half health or less, gain !M! Regen."
   },
+  "${modID}:Neurolink_Warforged": {
+    "NAME": "Neurolink",
+    "DESCRIPTION": "Whenever you attack an enemy that intends to attack, gain !M! ${modID}:Energy_Shield."
+  },
   "${modID}:RaiseShields_Warforged": {
     "NAME": "Raise Shields",
     "DESCRIPTION": "Gain !B! ${modID}:Energy_Shield !M! times. NL Dexterity affects this card."

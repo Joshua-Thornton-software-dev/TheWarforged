@@ -27,7 +27,7 @@ public class DiagnosticsRelic_Warforged extends AbstractWarforgedRelic {
     private final int CARDS_TO_ACTIVATE_BONUS = 5;
     private final int ENERGY_SHIELD_BONUS = 100;
 
-    BlockModContainer blockModContainer;
+    private final BlockModContainer blockModContainer;
 
     public DiagnosticsRelic_Warforged() {
         super(ID, NAME, RARITY, LANDING_SOUND);

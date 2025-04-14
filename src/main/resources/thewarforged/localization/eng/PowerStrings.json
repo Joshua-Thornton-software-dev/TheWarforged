@@ -20,6 +20,13 @@
       " damage equal to half of the attack damage (rounded down), then #yIonized is reduced by 1. This damage can be blocked."
     ]
   },
+  "${modID}:NeurolinkPower_Warforged": {
+    "NAME": "Neurolink",
+    "DESCRIPTIONS": [
+      "Whenever you attack an enemy, if that enemy intends to attack, gain #b",
+      " #yEnergy_Shield"
+    ]
+  },
   "${modID}:StableShieldsPower_Warforged": {
     "NAME": "Stable Shields",
     "DESCRIPTIONS": [
