@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import static thewarforged.TheWarforgedMod.makeID;
 
 public class IonizedPower_Warforged extends AbstractWarforgedPower {
-    public static final String POWER_ID = makeID("IonizedPower_Warforged");
+    public static final String POWER_ID = makeID(IonizedPower_Warforged.class.getSimpleName());
     private static final AbstractPower.PowerType POWER_TYPE = PowerType.DEBUFF;
     private static final boolean IS_TURNED_BASED = false;
 
