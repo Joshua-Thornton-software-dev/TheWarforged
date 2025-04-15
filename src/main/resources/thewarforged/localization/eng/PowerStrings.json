@@ -5,6 +5,14 @@
       "You are Very Cool and Strong."
     ]
   },
+  "${modID}:FluxPower_Warforged": {
+    "NAME": "Flux Node",
+    "DESCRIPTIONS": [
+      "Whenever you play a card that costs #b",
+      " [E] or more, gain #b",
+      " temporary #yDexterity."
+    ]
+  },
   "${modID}:GyrospinePower_Warforged": {
     "NAME": "Gyrospine",
     "DESCRIPTIONS": [
