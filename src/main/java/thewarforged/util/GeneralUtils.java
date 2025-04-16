@@ -18,14 +18,4 @@ public class GeneralUtils {
     public static String removePrefix(String ID) {
         return ID.substring(ID.indexOf(":") + 1);
     }
-
-    public static void easyPrint(String msg) {
-        easyPrint(msg, "+++++");
-    }
-
-    public static void easyPrint(String msg, String divider) {
-        System.out.println(divider);
-        System.out.println(msg);
-        System.out.println(divider);
-    }
 }

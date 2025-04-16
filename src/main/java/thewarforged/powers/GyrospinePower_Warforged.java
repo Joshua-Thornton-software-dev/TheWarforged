@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.RegenPower;
-import thewarforged.util.GeneralUtils;
 
 import static thewarforged.TheWarforgedMod.makeID;
 
@@ -32,11 +31,9 @@ public class GyrospinePower_Warforged extends AbstractWarforgedPower {
 
     @Override
     public void wasHPLost(DamageInfo info, int damageAmount) {
-        GeneralUtils.easyPrint("wasHPLost of " + this.getClass().getSimpleName());
         float newHealth = this.owner.currentHealth - damageAmount;
         float halfHealth = this.owner.maxHealth / 2.0F;
         if (newHealth <= halfHealth) {
-            GeneralUtils.easyPrint("is at or below half health");
             this.addToBot(
                     new ApplyPowerAction(
                             this.owner,
