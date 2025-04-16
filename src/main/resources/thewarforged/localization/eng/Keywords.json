@@ -29,7 +29,7 @@
     "DESCRIPTION": "After playing a card, lose HP equal to the number of [E] you have past 3. (This number can be affected by powers and relics)"
   },
   {
-    "ENERGY_SHIELDS": "Energy Shields",
+    "ENERGY_SHIELD": "Energy Shield",
     "NAMES": [
       "energy shield",
       "energy_shield",
@@ -43,7 +43,7 @@
       "ionized",
       "ionize"
     ],
-    "DESCRIPTION": "For each attack, also take half that attack's damage (rounded down) and reduce Ionize by 1."
+    "DESCRIPTION": "For each attack, also take half that attack's damage (rounded down) and reduce Ionized by 1."
   },
   {
     "LIVING_CONSTRUCT": "Living Construct",
@@ -59,7 +59,7 @@
       "overload",
       "overloaded"
     ],
-    "DESCRIPTION": "Every 6th card played in a turn is played twice. The copy does not trigger #yVolatile #yAether or #yAetherburn."
+    "DESCRIPTION": "Every 6th card played in a turn is played twice."
   },
   {
     "REPLACEMENT_PART": "Replacement Part",

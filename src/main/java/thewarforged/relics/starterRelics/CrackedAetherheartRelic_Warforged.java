@@ -37,6 +37,10 @@ public class CrackedAetherheartRelic_Warforged extends AbstractWarforgedRelic {
         super(ID, NAME, RARITY, LANDING_SOUND);
     }
 
+    public int getCurrentEnergyGain() {
+        return this.currentEnergyGain;
+    }
+
     @Override
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];

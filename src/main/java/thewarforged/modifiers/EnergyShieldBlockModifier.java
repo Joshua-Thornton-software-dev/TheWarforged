@@ -5,6 +5,7 @@ import com.evacipated.cardcrawl.mod.stslib.blockmods.AbstractBlockModifier;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.KeywordStrings;
+import thewarforged.powers.StableShieldsPower_Warforged;
 
 import static thewarforged.TheWarforgedMod.makeID;
 
@@ -20,6 +21,7 @@ public class EnergyShieldBlockModifier extends AbstractBlockModifier {
 
     @Override
     public int amountLostAtStartOfTurn() {
+        if (this.owner.getPower(StableShieldsPower_Warforged.POWER_ID) != null) return 0;
         return ((this.getCurrentAmount() + 1) / 2);
     }
 

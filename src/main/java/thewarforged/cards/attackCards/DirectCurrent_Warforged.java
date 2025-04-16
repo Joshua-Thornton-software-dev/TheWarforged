@@ -1,14 +1,13 @@
 package thewarforged.cards.attackCards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import thewarforged.actions.powerActions.ApplyIonizedPowerAction_Warforged;
 import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
-import thewarforged.powers.IonizedPower_Warforged;
 import thewarforged.util.CardStats;
 
 public class DirectCurrent_Warforged extends AbstractWarforgedCard {
@@ -50,7 +49,9 @@ public class DirectCurrent_Warforged extends AbstractWarforgedCard {
                 AbstractGameAction.AttackEffect.LIGHTNING
         );
         this.addToBot(damageAction);
-        IonizedPower_Warforged ionizedPower = new IonizedPower_Warforged(monster, this.magicNumber);
-        this.addToBot(new ApplyPowerAction(monster, player, ionizedPower, this.magicNumber));
+
+        this.addToBot(new ApplyIonizedPowerAction_Warforged(monster, player, this.magicNumber));
+//        IonizedPower_Warforged ionizedPower = new IonizedPower_Warforged(monster, this.magicNumber);
+//        this.addToBot(new ApplyPowerAction(monster, player, ionizedPower, this.magicNumber));
     }
 }

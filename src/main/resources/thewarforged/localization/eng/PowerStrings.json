@@ -5,11 +5,33 @@
       "You are Very Cool and Strong."
     ]
   },
+  "${modID}:FluxPower_Warforged": {
+    "NAME": "Flux Node",
+    "DESCRIPTIONS": [
+      "Whenever you play a card that costs #b",
+      " [E] or more, gain #b",
+      " temporary #yDexterity."
+    ]
+  },
   "${modID}:GyrospinePower_Warforged": {
     "NAME": "Gyrospine",
     "DESCRIPTIONS": [
       "The next time you fall to half health or less, gain #b",
       " #yRegen."
+    ]
+  },
+  "${modID}:HighVoltagePower_Warforged": {
+    "NAME": "High Voltage",
+    "DESCRIPTIONS": [
+      "Whenever this creature applies #yIonized to another creature, that creature loses HP equal to #b",
+      " * their new #yIonized level."
+    ]
+  },
+  "${modID}:IonCoilPower_Warforged": {
+    "NAME": "Ion Coil",
+    "DESCRIPTIONS": [
+      "Whenever this creature applies #yIonized to another creature, #b",
+      " additional #yIonized is applied."
     ]
   },
   "${modID}:IonizedPower_Warforged": {
@@ -18,6 +40,21 @@
       "Whenever you attack, you take",
       "Whenever this creature attacks, it takes",
       " damage equal to half of the attack damage (rounded down), then #yIonized is reduced by 1. This damage can be blocked."
+    ]
+  },
+  "${modID}:NeurolinkPower_Warforged": {
+    "NAME": "Neurolink",
+    "DESCRIPTIONS": [
+      "Whenever you attack an enemy, if that enemy intends to attack, gain #b",
+      " #yEnergy_Shield"
+    ]
+  },
+  "${modID}:StableShieldsPower_Warforged": {
+    "NAME": "Stable Shields",
+    "DESCRIPTIONS": [
+      "#yEnergy #yShield is not lost at the start of your next turn.",
+      "#yEnergy #yShield is not lost at the start of your next #b",
+      " turns."
     ]
   }
 }
