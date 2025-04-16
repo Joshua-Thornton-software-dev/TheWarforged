@@ -20,8 +20,7 @@ public class IonizedPower_Warforged extends AbstractWarforgedPower {
     private static final boolean IS_TURNED_BASED = false;
 
     public IonizedPower_Warforged(AbstractCreature owner, AbstractCreature source, int amount) {
-        super(POWER_ID, POWER_TYPE, IS_TURNED_BASED, owner, amount);
-        this.source = source;
+        super(POWER_ID, POWER_TYPE, IS_TURNED_BASED, owner, source, amount);
     }
 
     private void handleHighVoltage() {
