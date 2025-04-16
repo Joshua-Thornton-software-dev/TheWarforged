@@ -10,7 +10,8 @@ import thewarforged.util.CardStats;
 
 /**
  * This class is for a power card that represents a missing/broken part for the Warforged, the Flux Node.
- * Once played, any card played after with a cost of 4 or higher (variable) gains 3 (variable) temporary Dexterity.
+ * Once played, any card played after with a cost of 4 or higher (variable) grants the player a gain of
+ * 3 (variable) temporary Dexterity.
  * Upgraded, the threshold decreases by 1, and the temp Dex increases by 1.
  * For the purposes of this effect, cards that cost X are considered to cost the player's total energy spent on
  * the card, which would be their current total at the time the X-cost card is played + the amount of energy granted
