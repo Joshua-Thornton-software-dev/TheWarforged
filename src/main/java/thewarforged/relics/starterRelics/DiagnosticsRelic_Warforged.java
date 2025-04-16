@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.modifiers.EnergyShieldBlockModifier;
 import thewarforged.relics.AbstractWarforgedRelic;
-import thewarforged.util.GeneralUtils;
+import thewarforged.util.WarforgedUtils;
 
 import java.util.ArrayList;
 
@@ -100,7 +100,7 @@ public class DiagnosticsRelic_Warforged extends AbstractWarforgedRelic {
      */
     private boolean isCardUniqueReplacementPart(AbstractCard card) {
         if (this.isCardReplacementPart(card)) {
-            return !(GeneralUtils.doesGroupContainSimilarCard(AbstractDungeon.player.masterDeck, card));
+            return !(WarforgedUtils.doesGroupContainSimilarCard(AbstractDungeon.player.masterDeck, card));
         }
         return false;
     }
