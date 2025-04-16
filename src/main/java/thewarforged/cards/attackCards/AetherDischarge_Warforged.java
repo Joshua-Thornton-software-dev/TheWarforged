@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewarforged.actions.attackactions.AetherDischargeAction_Warforged;
 import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
+import thewarforged.util.CardCosts_Warforged;
 import thewarforged.util.CardStats;
 
 public class AetherDischarge_Warforged extends AbstractWarforgedCard {
@@ -16,7 +17,7 @@ public class AetherDischarge_Warforged extends AbstractWarforgedCard {
             CardType.ATTACK,
             CardRarity.BASIC,
             CardTarget.ALL_ENEMY,
-            CardStats.X_COST()
+            CardCosts_Warforged.X_COST()
     );
 
     private static final int ATTACK_DAMAGE = 2;

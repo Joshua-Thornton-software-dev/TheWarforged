@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.powers.GyrospinePower_Warforged;
+import thewarforged.util.CardCosts_Warforged;
 import thewarforged.util.CardStats;
 
 @SuppressWarnings("FieldCanBeLocal")
@@ -17,7 +18,7 @@ public class Gyrospine_Warforged extends AbstractWarforgedCard {
             CardType.POWER,
             CardRarity.UNCOMMON,
             CardTarget.SELF,
-            CardStats.POSITIVE_COST(2)
+            CardCosts_Warforged.POSITIVE_COST(2)
     );
 
     private final int REGEN_ON_TRIGGER = 4;

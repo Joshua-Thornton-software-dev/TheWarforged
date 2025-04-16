@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
+import thewarforged.util.CardCosts_Warforged;
 import thewarforged.util.CardStats;
 
 public class Strike_Warforged extends AbstractWarforgedCard {
@@ -29,7 +30,7 @@ public class Strike_Warforged extends AbstractWarforgedCard {
             //The card's baseCost, before modifiers. Can be -2 or higher. Values of 0 or higher result in playable cards
             // this that exact base cost. -1 results in an X-cost card. -2 results in an unplayable card, like status
             // cards. CardStats contains readable static methods for these values.
-            CardStats.ZERO_COST()
+            CardCosts_Warforged.ZERO_COST()
     );
 
     //Not to be confused with the "damage" public int variable on AbstractCard. This is damage the card would deal

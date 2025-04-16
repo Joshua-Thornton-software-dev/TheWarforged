@@ -7,6 +7,7 @@ import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.powers.HighVoltagePower_Warforged;
 import thewarforged.powers.IonCoilPower_Warforged;
+import thewarforged.util.CardCosts_Warforged;
 import thewarforged.util.CardStats;
 
 public class IonCoil_Warforged extends AbstractWarforgedCard {
@@ -17,7 +18,7 @@ public class IonCoil_Warforged extends AbstractWarforgedCard {
             CardType.POWER,
             CardRarity.UNCOMMON,
             CardTarget.SELF,
-            CardStats.POSITIVE_COST(2)
+            CardCosts_Warforged.POSITIVE_COST(2)
     );
 
     private static final int ADDITIONAL_IONIZED = 1;

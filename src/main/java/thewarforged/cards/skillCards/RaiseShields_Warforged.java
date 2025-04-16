@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.modifiers.EnergyShieldBlockModifier;
+import thewarforged.util.CardCosts_Warforged;
 import thewarforged.util.CardStats;
 
 public class RaiseShields_Warforged extends AbstractWarforgedCard {
@@ -17,7 +18,7 @@ public class RaiseShields_Warforged extends AbstractWarforgedCard {
             CardType.SKILL,
             CardRarity.BASIC,
             CardTarget.SELF,
-            CardStats.POSITIVE_COST(2)
+            CardCosts_Warforged.POSITIVE_COST(2)
     );
 
     private static final int ENERGY_SHIELD_AMOUNT = 4;

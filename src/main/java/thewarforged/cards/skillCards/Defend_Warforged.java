@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
+import thewarforged.util.CardCosts_Warforged;
 import thewarforged.util.CardStats;
 
 public class Defend_Warforged extends AbstractWarforgedCard {
@@ -15,7 +16,7 @@ public class Defend_Warforged extends AbstractWarforgedCard {
             CardType.SKILL,
             CardRarity.BASIC,
             CardTarget.SELF,
-            CardStats.ZERO_COST()
+            CardCosts_Warforged.ZERO_COST()
     );
 
     //Not to be confused with the "block" public variable on AbstractCard, which will be initialized using this value.
