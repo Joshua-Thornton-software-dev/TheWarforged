@@ -20,6 +20,20 @@
       " #yRegen."
     ]
   },
+  "${modID}:HighVoltagePower_Warforged": {
+    "NAME": "High Voltage",
+    "DESCRIPTIONS": [
+      "Whenever this creature applies #yIonized to another creature, that creature loses HP equal to #b",
+      " * their new #yIonized level."
+    ]
+  },
+  "${modID}:IonCoilPower_Warforged": {
+    "NAME": "Ion Coil",
+    "DESCRIPTIONS": [
+      "Whenever this creature applies #yIonized to another creature, #b",
+      " additional #yIonized is applied."
+    ]
+  },
   "${modID}:IonizedPower_Warforged": {
     "NAME": "Ionized",
     "DESCRIPTIONS": [

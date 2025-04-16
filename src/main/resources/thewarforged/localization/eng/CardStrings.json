@@ -30,6 +30,11 @@
     "NAME": "Gyrospine",
     "DESCRIPTION": "${modID}:Replacement_Part NL The next time you fall to half health or less, gain !M! Regen."
   },
+  "${modID}:IonCoil_Warforged": {
+    "NAME": "Ion Coil",
+    "DESCRIPTION": "${modID}:Replacement_Part NL Whenever you apply ${modID}:Ionized, apply !M! additional ${modID}:Ionized.",
+    "UPGRADE_DESCRIPTION": "${modID}:Replacement_Part NL Whenever you apply ${modID}:Ionized, apply !M! additional ${modID}:Ionized, then the target loses !${modID}:HP_LOSS_VAR! * ${modID}:Ionized HP."
+  },
   "${modID}:Neurolink_Warforged": {
     "NAME": "Neurolink",
     "DESCRIPTION": "${modID}:Replacement_Part NL Whenever you attack an enemy that intends to attack, gain !M! ${modID}:Energy_Shield."
