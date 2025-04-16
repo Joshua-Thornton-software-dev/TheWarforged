@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.powers.LoseDexterityPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import thewarforged.relics.starterRelics.CrackedAetherheartRelic_Warforged;
-import thewarforged.util.CardStats;
+import thewarforged.util.CardCosts_Warforged;
 
 import static thewarforged.TheWarforgedMod.makeID;
 
@@ -56,7 +56,7 @@ public class FluxPower_Warforged extends AbstractWarforgedPower {
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action){
         int cost = card.cost;
-        if (cost == CardStats.X_COST()) {
+        if (cost == CardCosts_Warforged.X_COST()) {
             cost = EnergyPanel.getCurrentEnergy() + get_aetherheartRelic().getCurrentEnergyGain();
         }
         if (cost >= this.amount) {

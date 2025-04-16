@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewarforged.actions.powerActions.ApplyIonizedPowerAction_Warforged;
 import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
+import thewarforged.util.CardCosts_Warforged;
 import thewarforged.util.CardStats;
 
 public class DirectCurrent_Warforged extends AbstractWarforgedCard {
@@ -18,7 +19,7 @@ public class DirectCurrent_Warforged extends AbstractWarforgedCard {
             CardType.ATTACK,
             CardRarity.BASIC,
             CardTarget.ENEMY,
-            CardStats.POSITIVE_COST(1)
+            CardCosts_Warforged.POSITIVE_COST(1)
     );
 
     private static final int ATTACK_DAMAGE = 4;

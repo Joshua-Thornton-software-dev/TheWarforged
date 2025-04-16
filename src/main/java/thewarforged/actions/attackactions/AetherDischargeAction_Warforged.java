@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import com.megacrit.cardcrawl.vfx.combat.CleaveEffect;
 import com.megacrit.cardcrawl.vfx.combat.WhirlwindEffect;
-import thewarforged.util.CardStats;
+import thewarforged.util.CardCosts_Warforged;
 
 public class AetherDischargeAction_Warforged extends AbstractGameAction {
     public int[] multiDamage;
@@ -50,7 +50,7 @@ public class AetherDischargeAction_Warforged extends AbstractGameAction {
 
         //I cannot for the life of me figure out how/why this is a thing since we always take all of their energy
         // anyway when the card gets played.
-        if (this.energyOnUse != CardStats.X_COST()) {
+        if (this.energyOnUse != CardCosts_Warforged.X_COST()) {
             numEffects = this.energyOnUse;
         }
 

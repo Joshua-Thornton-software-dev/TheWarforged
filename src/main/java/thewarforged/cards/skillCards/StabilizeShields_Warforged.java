@@ -9,6 +9,7 @@ import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.modifiers.EnergyShieldBlockModifier;
 import thewarforged.powers.StableShieldsPower_Warforged;
+import thewarforged.util.CardCosts_Warforged;
 import thewarforged.util.CardStats;
 
 public class StabilizeShields_Warforged extends AbstractWarforgedCard {
@@ -19,7 +20,7 @@ public class StabilizeShields_Warforged extends AbstractWarforgedCard {
             CardType.SKILL,
             CardRarity.UNCOMMON,
             CardTarget.SELF,
-            CardStats.ZERO_COST()
+            CardCosts_Warforged.ZERO_COST()
     );
 
     private static final int ENERGY_SHIELD_AMOUNT = 6;

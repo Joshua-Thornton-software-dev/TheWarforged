@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.powers.FluxPower_Warforged;
+import thewarforged.util.CardCosts_Warforged;
 import thewarforged.util.CardStats;
 
 /**
@@ -25,7 +26,7 @@ public class FluxNode_Warforged extends AbstractWarforgedCard {
             CardType.POWER,
             CardRarity.UNCOMMON,
             CardTarget.SELF,
-            CardStats.POSITIVE_COST(4)
+            CardCosts_Warforged.POSITIVE_COST(4)
     );
 
     //The amount of energy that a card must cost/use in order to trigger the effect.

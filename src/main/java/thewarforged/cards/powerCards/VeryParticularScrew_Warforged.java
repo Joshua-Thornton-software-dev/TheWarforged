@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.MetallicizePower;
 import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
+import thewarforged.util.CardCosts_Warforged;
 import thewarforged.util.CardStats;
 
 public class VeryParticularScrew_Warforged extends AbstractWarforgedCard {
@@ -16,7 +17,7 @@ public class VeryParticularScrew_Warforged extends AbstractWarforgedCard {
             CardType.POWER,
             CardRarity.COMMON,
             CardTarget.SELF,
-            CardStats.ZERO_COST()
+            CardCosts_Warforged.ZERO_COST()
     );
 
     private static final int METALLICIZE_AMOUNT = 2;

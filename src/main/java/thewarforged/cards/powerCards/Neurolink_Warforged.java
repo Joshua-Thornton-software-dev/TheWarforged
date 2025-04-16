@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewarforged.cards.AbstractWarforgedCard;
 import thewarforged.character.TheWarforged;
 import thewarforged.powers.NeurolinkPower_Warforged;
+import thewarforged.util.CardCosts_Warforged;
 import thewarforged.util.CardStats;
 
 public class Neurolink_Warforged extends AbstractWarforgedCard {
@@ -16,7 +17,7 @@ public class Neurolink_Warforged extends AbstractWarforgedCard {
             CardType.POWER,
             CardRarity.RARE,
             CardTarget.SELF,
-            CardStats.POSITIVE_COST(4)
+            CardCosts_Warforged.POSITIVE_COST(4)
     );
 
     //The amount of Energy Shield that will be gained when attacking an attacking enemy.
